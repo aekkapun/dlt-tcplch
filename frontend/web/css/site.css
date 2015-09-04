@@ -1,0 +1,202 @@
+html,
+body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 100px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+.navbar-police {
+    //background-color: #3E3F3A;
+    min-height: 100px;
+    border-color: #3E3F3A;
+    background:#701980 ;/*#f5f5f5  76167c 9C27B0*/
+    border-bottom:1px solid #DEBED6;
+}
+
+navbar2 {
+    position: relative;
+    min-height: 100px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+.navbar-police .navbar-brand {
+    color: #fff;
+}
+.navbar-police .navbar-brand:hover,
+.navbar-police .navbar-brand:focus {
+    color: #fff;
+    background-color: transparent;
+}
+.navbar-police .navbar-text {
+    color: #9d9d9d;
+    font-weight: bold;
+}
+.navbar-police .navbar-nav > li > a {
+    color: #DDA22C;
+}
+.navbar-police .navbar-nav > li > a:hover,
+.navbar-police .navbar-nav > li > a:focus {
+    color: #fff;
+    background-color: transparent;
+}
+.navbar-police .navbar-nav > .active > a,
+.navbar-police .navbar-nav > .active > a:hover,
+.navbar-police .navbar-nav > .active > a:focus {
+    color: #FFF;
+    background-color: #621671;
+}
+.navbar-police .navbar-nav > .disabled > a,
+.navbar-police .navbar-nav > .disabled > a:hover,
+.navbar-police .navbar-nav > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+}
+.navbar-police .navbar-toggle {
+    border-color: #333;
+}
+.navbar-police .navbar-toggle:hover,
+.navbar-police .navbar-toggle:focus {
+    background-color: #333;
+}
+.navbar-police .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+.navbar-police .navbar-collapse,
+.navbar-police .navbar-form {
+    border-color: #101010;
+}
+.dltfooter{
+    color: #fff;
+    height: 60px;
+    background-color: #380944;
+    border-top: 1px solid #DDD;
+    padding-top: 20px;
+}
+.dltfooter a{
+    color: A6AAAD;
+    text-decoration: none;
+}
+
+.carousel, .item, .active {
+    height:100%;
+}
+.carousel-inner {
+    height:100%;
+}
+.carousel {
+    margin-bottom: 60px;
+}
+.carousel-caption {
+    z-index: 10;
+}
+.carousel .item {
+    background-color: #777;
+}
+.carousel .carousel-inner .bg {
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.bgm{
+    display: block;
+    width: 100%;
+    background-color:#DEBED6;
+}
+
+.dltbreadcrumb {
+    padding: 8px 15px;
+    margin-top: 40px;
+    list-style: none;
+    background-color: #E7D0F3;
+    border-radius: 4px;
+}
+
+.btn-dlt {
+    color: #fff;
+    background-color: #5E42A2;
+    border-color: #7545C1;
+}

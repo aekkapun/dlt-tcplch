@@ -1,0 +1,24 @@
+Free Bootstrap Template
+
+Created by BootstrapZen - http://www.bootstrapzen.com/
+
+Inspired from https://dribbble.com/shots/857361-User-Login
+
+Free for personal and commercial use, please read more here:
+http://www.bootstrapzen.com/license/
+
+--------------------------------------------------------------------------------
+
+Credits:
+
+Twitter Bootstrap (getbootstrap.com)
+jQuery (jquery.com)
+Glyphicons (glyphicons.com)
+Google Font Lato (google.com/fonts/specimen/Lato)
+HTML5 Shim (github.com/aFarkas/html5shiv)
+Respond.js (github.com/scottjehl/Respond)
+
+--------------------------------------------------------------------------------
+
+Visit us at http://www.bootstrapzen.com
+
