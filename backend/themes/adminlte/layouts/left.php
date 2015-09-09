@@ -1,75 +1,61 @@
 <?php
-use yii\bootstrap\Nav;
 
+use yii\bootstrap\Nav;
+use yii\helpers\Html;
+use yii\web\NotFoundHttpException;
 ?>
-<aside class="main-sidebar">
+
+
+<aside class="left-side sidebar-offcanvas">
 
     <section class="sidebar">
 
-        <!-- Sidebar user panel -->
 
-        <!-- search form 
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-              <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-        </form>
-        -->
-        <!-- /.search form -->
-
-        <?=
-        Nav::widget(
-            [
-                'encodeLabels' => false,
-                'options' => ['class' => 'sidebar-menu'],
-                'items' => [
-                    '<li class="header">Menu หลัก</li>',
-                    ['label' => '<i class="fa fa-file-code-o"></i><span>Gii</span>', 'url' => ['/gii']],
-                    ['label' => '<i class="fa fa-dashboard"></i><span>Debug</span>', 'url' => ['/debug']],
-                    [
-                        'label' => '<i class="glyphicon glyphicon-lock"></i><span>Sing in</span>', //for basic
-                        'url' => ['/site/login'],
-                        'visible' =>Yii::$app->user->isGuest
-                    ],
-                ],
-            ]
-        );
-        ?>
+        <!-- sidebar-menu. -- Start -->
 
         <ul class="sidebar-menu">
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-share"></i> <span>Same tools</span>
-                    <i class="fa fa-angle-left pull-right"></i>
+            <li>
+                <a href="<?= Yii::$app->homeUrl ?>" class="navbar-link">
+                    <i class="fa fa-angle-down"></i> <span class="text-info">Menu</span>
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="<?= \yii\helpers\Url::to(['/gii']) ?>"><span class="fa fa-file-code-o"></span> Gii</a>
-                    </li>
-                    <li><a href="<?= \yii\helpers\Url::to(['/debug']) ?>"><span class="fa fa-dashboard"></span> Debug</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </li>
+            <?php if ($this->context->module->id == 'customs')  ?>
+            <?php
+            if ($this->context->module->id == 'configuration')
+                echo $this->render('menu/configuration');
+            else if ($this->context->module->id == 'police')
+                echo $this->render('menu/police');
+            else if ($this->context->module->id == 'dlt')
+                echo $this->render('menu/course');
+            else if ($this->context->module->id == 'guide')
+                echo $this->render('menu/guide');
+            else if ($this->context->module->id == 'customs')
+                echo $this->render('menu/admission');
+            else if ($this->context->module->id == 'report' || get_class($this->context) == 'app\controllers\LoginDetailsController')
+                echo $this->render('menu/report');
+            else if ($this->context->module->id == 'dashboard')
+                echo $this->render('menu/dashboard');
+            else if ($this->context->action->id == 'resetstudloginid' || $this->context->action->id == 'resetstudpassword' || $this->context->action->id == 'updatestudloginid')
+                echo $this->render('menu/student');
+            else if ($this->context->action->id == 'resetemploginid' || $this->context->action->id == 'resetemppassword' || $this->context->action->id == 'updateemploginid')
+                echo $this->render('menu/employee');
+            else if ($this->context->action->id == 'error' || $this->context->action->id == 'change')
+                echo $this->render('menu/Modules');
+            else if ($this->context->module->id == 'usermanagement')
+                echo $this->render('menu/usermanagement');
+            else if ($this->context->module->id == 'admin')
+                echo $this->render('menu/rights');
+            else
+                echo $this->render('menu/config');
+            ?>
         </ul>
+
+        <!-- sidebar-menu. -- End -->
 
     </section>
 
 </aside>
+
+
+
+

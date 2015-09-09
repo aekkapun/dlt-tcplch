@@ -9,7 +9,8 @@ use yii\bootstrap\NavBar;
 ?>
 
 <header class="main-header">
-    <?= Html::img('@web/images/logoadmin.png', ['alt' => Yii::$app->name]) ?>
+    <?php // Html::img('@web/images/logoadmin.png', ['alt' => Yii::$app->name]) ?>
+    <?= Html::a(Html::img(Yii::$app->request->baseUrl.'/images/logo.png', [ 'height'=>'40px']), Yii::$app->homeUrl, ['class' => 'logo']) ?>
 <?php // Html::a('<img = ><span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo'])  ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
