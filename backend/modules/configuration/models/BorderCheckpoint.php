@@ -3,6 +3,7 @@
 namespace backend\modules\configuration\models;
 
 use Yii;
+use backend\modules\configuration\models\Province;
 
 /**
  * This is the model class for table "border_checkpoint".
@@ -48,5 +49,9 @@ class BorderCheckpoint extends \yii\db\ActiveRecord
             'border_other' => 'Border Other',
             'border_land' => 'Border Land',
         ];
+    }
+        public function getProvince()
+    {
+        return $this->hasOne(Province::className(), ['PRV_CODE' => 'border_province']);
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
-
+use kartik\widgets\Select2;
+use backend\modules\configuration\models\Province;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\configuration\models\BorderCheckpointSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -28,11 +29,32 @@ $this->params['breadcrumbs'][] = $this->title;
                         'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
-                            'id',
-                            'border_province',
+                            //'id',
+                            [
+                                'attribute' => 'border_province',
+                                'header' => 'ด่านจังหวัด',
+                                'width' => '250px',
+                                'value' => function ($model, $key, $index, $widget) {
+                                    return $model->province->PRV_DESC;
+                                },
+                                'filterType' => GridView::FILTER_SELECT2,
+                                'filter' => ArrayHelper::map(Province::find()->orderBy('PRV_DESC')->asArray()->all(), 'PRV_CODE', 'PRV_DESC'),
+                                'filterWidgetOptions' => [
+                                    'pluginOptions' => ['allowClear' => true],
+                                ],
+                                'filterInputOptions' => ['placeholder' => 'กรองตามจังหวัด'],
+                                'group' => true, // enable grouping
+                            ],
+//                            [
+//                                'attribute' => 'border_province',
+//                                'header' => 'ด่านจังหวัด',
+//                                'value' => function ($model) {
+//                                    return $model->province->PRV_DESC;
+//                                }
+//                            ],
                             'border_thai',
                             'border_other',
-                            'border_land',
+                            //'border_land',
                             ['class' => 'yii\grid\ActionColumn'],
                         ],
                     ]);

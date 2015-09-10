@@ -23,7 +23,7 @@
         "nex/yii2-chosen": "dev-master",
         "kartik-v/yii2-grid": "*",
         "kartik-v/yii2-export": "*",
-        "kartik-v/yii2-mpdf": "*",
+        "kartik-v/yii2-mpdf": "dev-master",
         "yiisoft/yii2-jui": "~2.0.0",
         "kartik-v/yii2-widgets": "*",
         "yurkinx/yii2-image": "dev-master",

@@ -83,6 +83,9 @@ return [
         'guide' => [
             'class' => 'backend\modules\guide\GuideModule',
         ],
+        'permitapp' => [
+            'class' => 'backend\modules\permitapp\Module',
+        ],
         'report' => [
             'class' => 'backend\modules\report\ReportModule',
         ],
@@ -98,7 +101,7 @@ return [
                 //'searchClass' => 'app\models\UserSearch'    // fully qualified class name of your User model for searching
                 ]
             ],
-            'layout' => 'left-menu',
+        //'layout' => 'left-menu',
         ]
     ],
     'params' => $params,

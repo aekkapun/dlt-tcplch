@@ -104,7 +104,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div><!-- /.info-box -->
                 </div>
 
-
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="edusec-link-box">
                         <span class="edusec-link-box-icon bg-light-blue-active"><i class="fa fa-flag-checkered"></i></span>

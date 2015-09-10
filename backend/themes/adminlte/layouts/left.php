@@ -41,6 +41,8 @@ use yii\web\NotFoundHttpException;
                 echo $this->render('menu/employee');
             else if ($this->context->action->id == 'error' || $this->context->action->id == 'change')
                 echo $this->render('menu/Modules');
+            else if ($this->context->module->id == 'permitapp')
+                echo $this->render('menu/permitapp');
             else if ($this->context->module->id == 'usermanagement')
                 echo $this->render('menu/usermanagement');
             else if ($this->context->module->id == 'admin')
