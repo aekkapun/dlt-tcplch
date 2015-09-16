@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
 
     <?=
     $form->field($model, 'border_province')->widget(Select2::classname(), [
-        'data' => ArrayHelper::map(Province::find()->all(), 'PRV_CODE', 'PRV_DESC'),
+        'data' => ArrayHelper::map(Province::find()->where(['BOR_FLAG'=>1])->all(), 'PRV_CODE', 'PRV_DESC'),
         'options' => ['placeholder' => ' ด่านจังหวัด ...',
             'id' => 'ddl-cat'
         ],

@@ -3,9 +3,9 @@
 <li class="treeview active">
 	<?= Html::a('<i class="fa fa-inr"></i> <span>ข้อมูลบริษัทนำเที่ยว/มัคคุเทศก์</span> <i class="fa fa-angle-left pull-right"></i>', ['/guide/default/index'])  ?>
         <ul class="treeview-menu">
-	<?php if(Yii::$app->user->can('/fees/bank-master/index')) { ?>
+	<?php if(Yii::$app->user->can('/guide/default/index')) { ?>
             <li>
-		<?= Html::a('<i class="fa fa-angle-double-right"></i> Bank Master',['/fees/bank-master/index'])  ?>
+		<?= Html::a('<i class="fa fa-angle-double-right"></i> รายชื่อบริษัทนำเที่ยว',['/guide/tour-company/index'])  ?>
 	    </li>
 	<?php } 
 	      if(Yii::$app->user->can('/fees/fees-collect-category/index')) {

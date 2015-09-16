@@ -44,7 +44,7 @@ class Province extends \yii\db\ActiveRecord
             [['PRV_CODE'], 'unique'],
             [['PRV_DESC'], 'unique'],
             [['PRV_ABREV'], 'unique'],
-            [['PRV_ENG_DESC'], 'unique']
+            [['PRV_ENG_DESC'], 'unique'],
         ];
     }
 
@@ -68,6 +68,7 @@ class Province extends \yii\db\ActiveRecord
             'OLD_REGION_CODE' => 'Old  Region  Code',
             'TRS_JOB_CODE' => 'Trs  Job  Code',
             'PRV_CODE_INSURE' => 'Prv  Code  Insure',
+            'BOR_FLAG'=>'จังหวัดที่มีด่านพรมแดน',
         ];
     }
 }

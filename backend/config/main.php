@@ -7,6 +7,7 @@ $params = array_merge(
 return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
+    'name' => 'ระบบการอนุญาตและออกเครื่องหมายการใช้รถ',
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
@@ -50,15 +51,9 @@ return [
         'allowActions' => [
             'site/*',
         //'admin/*',
-        //'gii/*',
-        //'debug/*',
-        //'configuration/*',
-        //'*',
-        // The actions listed here will be allowed to everyone including guests.
-        // So, 'admin/*' should not appear here in the production, of course.
-        // But in the earlier stages of your development, you may probably want to
-        // add a lot of actions here until you finally completed setting up rbac,
-        // otherwise you may not even take a first step.
+//'gii/*',
+//'debug/*',
+//'configuration/*',
         ]
     ],
     'modules' => [
@@ -73,6 +68,9 @@ return [
         ],
         'customs' => [
             'class' => 'backend\modules\customs\CustomsModule',
+        ],
+        'inspector' => [
+            'class' => 'backend\modules\inspector\Module',
         ],
         'police' => [
             'class' => 'backend\modules\police\PoliceModule',
@@ -98,7 +96,7 @@ return [
 // Usually you don't need to specify it explicitly, since the module will detect it automatically
                     'idField' => 'id', // id field of your User model that corresponds to Yii::$app->user->id
                     'usernameField' => 'username', // username field of your User model
-                //'searchClass' => 'app\models\UserSearch'    // fully qualified class name of your User model for searching
+//'searchClass' => 'app\models\UserSearch'    // fully qualified class name of your User model for searching
                 ]
             ],
         //'layout' => 'left-menu',

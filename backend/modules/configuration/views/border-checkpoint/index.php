@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return $model->province->PRV_DESC;
                                 },
                                 'filterType' => GridView::FILTER_SELECT2,
-                                'filter' => ArrayHelper::map(Province::find()->orderBy('PRV_DESC')->asArray()->all(), 'PRV_CODE', 'PRV_DESC'),
+                                'filter' => ArrayHelper::map(Province::find()->where(['BOR_FLAG'=>1])->orderBy('PRV_DESC')->asArray()->all(), 'PRV_CODE', 'PRV_DESC'),
                                 'filterWidgetOptions' => [
                                     'pluginOptions' => ['allowClear' => true],
                                 ],

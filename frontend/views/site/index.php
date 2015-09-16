@@ -5,8 +5,8 @@ use yii\bootstrap\Carousel;
 
 $this->title = 'รถมาใช้ในราชอาณาจักรเป็นการชั่วคราวเพื่อใช้ในการท่องเที่ยว';
 ?>
-<div class="site-index ">
-    <div>
+<div>
+    <div class="wrap">
         <?php
         echo Carousel::widget([
             'items' => [
@@ -18,31 +18,79 @@ $this->title = 'รถมาใช้ในราชอาณาจักรเ�
                 ],
                 ['content' => '<img src="images/slide/4.jpg"/>'],
                 ['content' => '<img src="images/slide/5.jpg"/>'],
-            ]
+            ],
         ]);
         ?>
 
     </div>
-    <div class="jumbotron">
-        <h1 class="text-success">Chinese Car Tour Permission! 
+    <div class="body-content">
+        <div class="row">       
             <?php
             echo date('01/m/Y'); // 01.11.2014
             echo ' - ';
             echo date('t/m/Y');  // 30.11.2014
             ?>
-        </h1><hr/>
-
-        <p class="lead">ระบบ รถมาใช้ในราชอาณาจักรเป็นการชั่วคราวเพื่อใช้ในการท่องเที่ยว.</p>
-
-        <p><a class="btn btn-lg btn-dlt" href="#">Get Develop with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
+            <hr/>
+        </div>
+        <!-- Page Features -->
         <div class="row">
 
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Feature Label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Feature Label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Feature Label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Feature Label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
+        <!-- /.row -->
 
     </div>
+
 </div>
 

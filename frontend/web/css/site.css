@@ -200,3 +200,17 @@ navbar2 {
     background-color: #5E42A2;
     border-color: #7545C1;
 }
+.background {
+  background: url('/images/bg.png') 50% 50% fixed;
+  background-repeat: x;
+  background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+}
+.bg2 {
+    background: transparent url("/images/bg_pallette2.png") repeat fixed 0% 0%;
+}
+.bgindex {
+    background: transparent url("/images/bg_pallette.png") repeat fixed 0% 0%;
+}
