@@ -232,7 +232,6 @@ use backend\modules\permitapp\models\PermitApp;
         </div>   
     </div>
 
-
     <div class="row">
         <hr/>
         <div class="col-md-6 col-xs-6">
