@@ -3,10 +3,10 @@
 	<?= Html::a('<i class="fa fa-user-secret"></i> <span>Permit Application</span> <i class="fa fa-angle-left pull-right"></i>', ['/#'])  ?>
         <ul class="treeview-menu">
 	<?php  
-	      if(Yii::$app->user->can('/admin/assignment/index')) {
+	      if(Yii::$app->user->can('/permitapp/default/index')) {
 	?>
             <li>
-		<?= Html::a('<i class="fa fa-angle-double-right"></i> Assignment',['/admin/assignment'])  ?>
+		<?= Html::a('<i class="fa fa-angle-double-right"></i> ยื่นคำขอ',['/permitapp/app-car/create'])  ?>
 	    </li>
 	<?php 
 	      }
