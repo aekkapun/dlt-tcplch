@@ -3,9 +3,15 @@
 namespace backend\modules\permitapp\models;
 
 use Yii;
+use yii\helpers\Json;
+use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\web\UploadedFile;
+use yii\helpers\BaseFileHelper;
+use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "permit_app_car".
+ * This is the model class for table "zform".
  *
  * @property integer $id
  * @property integer $gender
@@ -43,14 +49,22 @@ use Yii;
  * @property double $total_weight
  * @property string $engine_no
  * @property integer $seat
+ * @property integer $car_type
+ * @property integer $owner_type
+ * @property string $car_color
+ * @property string $carbody_no
+ * @property string $ref
+ * @property string $doc
  */
-class AppCar extends \yii\db\ActiveRecord {
+class Zform extends \yii\db\ActiveRecord {
+
+    const UPLOAD_FOLDER = 'docpermit';
 
     /**
      * @inheritdoc
      */
     public static function tableName() {
-        return 'permit_app_car';
+        return 'zform';
     }
 
     /**
@@ -58,15 +72,18 @@ class AppCar extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['car_type', 'carbody_no', 'owner_type', 'gender', 'car_color', 'fullname', 'passport', 'address', 'province', 'country', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'dlt_office', 'appearance', 'brands', 'models', 'engine_no'], 'required'],
-            [['gender', 'owner_type', 'car_type', 'age', 'car_color', 'province', 'country', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'request_chanel', 'created_at', 'updated_at', 'cretaed_by', 'updated_by', 'approve_status', 'approve_by', 'approve_comment', 'dlt_office', 'dlt_br', 'brands', 'seat'], 'integer'],
+            [['gender', 'operate_by', 'fullname', 'passport', 'address', 'province', 'country', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'appearance', 'brands', 'models', 'engine_no'], 'required'],
+            [['gender', 'operate_by', 'age', 'province', 'country', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'request_chanel', 'created_at', 'updated_at', 'cretaed_by', 'updated_by', 'approve_status', 'approve_by', 'approve_comment', 'dlt_office', 'dlt_br', 'brands', 'seat', 'car_type', 'owner_type'], 'integer'],
             [['start_date', 'end_date', 'approve_date'], 'safe'],
             [['weight', 'total_weight'], 'number'],
+            [['doc'], 'file', 'maxFiles' => 10],
             [['fullname', 'address', 'appearance'], 'string', 'max' => 128],
-            [['passport', 'telephone'], 'string', 'max' => 13],
-            [['car_enroll_country', 'models'], 'string', 'max' => 20],
+            [['passport', 'telephone', 'carbody_no'], 'string', 'max' => 13],
+            [['car_enroll_country', 'models', 'car_color'], 'string', 'max' => 20],
             [['plates_number'], 'string', 'max' => 8],
-            [['engine_no', 'carbody_no'], 'string', 'max' => 13]
+            [['engine_no'], 'string', 'max' => 11],
+            [['ref'], 'string', 'max' => 50],
+            [['ref'], 'unique']
         ];
     }
 
@@ -110,74 +127,45 @@ class AppCar extends \yii\db\ActiveRecord {
             'weight' => 'น้ำหนัก',
             'total_weight' => 'น้ำหนักรวม',
             'engine_no' => 'เลขเครื่องยนต์',
-            'carbody_no' => 'เลขตัวรถ',
             'seat' => 'ที่นั่ง',
             'car_type' => 'Car Type',
             'owner_type' => 'ผู้ขออนุญาติ เป็น/ไม่เป็น เจ้าของรถ',
-            'car_color' => 'สีรถ'
+            'car_color' => 'สีรถ',
+            'carbody_no' => 'เลขเครื่องยนต์',
+            'ref' => 'Ref',
+            'doc' => 'แนบหลักฐาน',
+            'operate_by' => 'ผู้ยื่นดำเนินการ'
         ];
     }
 
-    public static function itemAlias($type, $code = NULL) {
-        $_items = array(
-            'sex' => array(
-                '1' => 'ชาย',
-                '2' => 'หญิง',
-            ),
-            'prefixs' => array(
-                '1' => 'นาย',
-                '2' => 'นาง',
-                '3' => 'นางสาว',
-            ),
-            'marital' => array(
-                '1' => 'โสด',
-                '2' => 'สมรส',
-                '3' => 'อย่างร้าง',
-                '4' => 'แยกกันอยู่',
-                '5' => 'หมา้ย',
-            ),
-            'skill' => [
-                'Objective C' => 'Objective C',
-                'Python' => 'Python',
-                'Java' => 'Java',
-                'JavaScript' => 'JavaScript',
-                'PHP' => 'PHP',
-                'SQL' => 'SQL',
-                'Ruby' => 'Ruby',
-                'FoxPro' => 'FoxPro',
-                'C++' => 'C++',
-                'C' => 'C',
-                'ASP' => 'ASP',
-                'Assembly' => 'Assembly',
-                'Visual Basic' => 'Visual Basic'
-            ],
-            'social' => [
-                'facebook' => 'Facebook',
-                'twiter' => 'Twiter',
-                'google+' => 'Google+',
-                'tumblr' => 'Tumblr'
-            ],
-            'cartype' => [
-                '1' => 'รถจักรยานยนต์',
-                '2' => 'รถยนต์'
-            ],
-            'ownertype' => [
-                '1' => 'ผู้ขออนุญาตเป็นเจ้าของรถ',
-                '2' => 'ผู้ขออนุญาตไม่ใช่เจ้าของรถ'
-            ],
-            'operateby' => [
-                '1' => 'ผู้ขออนุญาตยื่นคำขอด้วยตนเอง',
-                '2' => 'ผู้ขออนุญาตให้บริษัทยื่นคำขอแทน',
-                '3'=>'ผู้ขออนุญาตให้มอบอำนาจให้บุคคลอื่นยื่นคำขอแทน'
-            ]
-        );
+    public static function getUploadPath() {
+        return Yii::getAlias('@webroot') . '/' . self::UPLOAD_FOLDER . '/';
+    }
 
+    public static function getUploadUrl() {
+        return Url::base(true) . '/' . self::UPLOAD_FOLDER . '/';
+    }
 
-        if (isset($code)) {
-            return isset($_items[$type][$code]) ? $_items[$type][$code] : false;
-        } else {
-            return isset($_items[$type]) ? $_items[$type] : false;
+    public function initialPreview($data, $field, $type = 'file') {
+        $initial = [];
+        $files = Json::decode($data);
+        if (is_array($files)) {
+            foreach ($files as $key => $value) {
+                if ($type == 'file') {
+                    $initial[] = "<div class='file-preview-other'><h2><i class='glyphicon glyphicon-file'></i></h2></div>";
+                } elseif ($type == 'config') {
+                    $initial[] = [
+                        'caption' => $value,
+                        'width' => '120px',
+                        'url' => Url::to(['/freelance/deletefile', 'id' => $this->id, 'fileName' => $key, 'field' => $field]),
+                        'key' => $key
+                    ];
+                } else {
+                    $initial[] = Html::img(self::getUploadUrl() . $this->ref . '/' . $value, ['class' => 'file-preview-image', 'alt' => $model->file_name, 'title' => $model->file_name]);
+                }
+            }
         }
+        return $initial;
     }
 
 }

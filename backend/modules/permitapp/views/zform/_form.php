@@ -6,6 +6,8 @@ use yii\bootstrap\ActiveForm;
 use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\grid\GridView;
+use kartik\widgets\FileInput;
 use backend\modules\configuration\models\Province;
 use backend\modules\configuration\models\Amphur;
 use backend\modules\configuration\models\District;
@@ -15,6 +17,8 @@ use kartik\widgets\TypeaheadBasic;
 use kartik\date\DatePicker;
 use backend\modules\permitapp\models\AppCar;
 use backend\modules\permitapp\models\PermitApp;
+use backend\modules\permitapp\models\Document;
+use backend\modules\permitapp\models\DocumentSearch;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\permitapp\models\AppCar */
@@ -30,15 +34,19 @@ use backend\modules\permitapp\models\PermitApp;
     <div class="panel panel-success">
         <div class="panel-heading">ข้อมูล รายละเอียดคำขอ</div>
         <div class="panel-body">
+            <?= $form->field($model, 'ref')->hiddenInput(['maxlength' => 50])->label(false); ?>
+
             <div class="row ">
                 <div class="col-md-1"></div>
                 <div class="col-md-4 col-xs-4  divbox-dlt">
-                    <span>ประเภทรถ</span><?= $form->field($model, 'car_type')->inline()->label(false)->radioList(AppCar::itemAlias('cartype')) ?>
+                    <span>ประเภทรถ</span><?= $form->field($model, 'car_type')->label(false)->radioList(AppCar::itemAlias('cartype')) ?>
                 </div>
                 <div class="col-md-1"></div>
-                <div class="col-md-4 col-xs-4 divbox-dlt">
-                    <span>ผู้ขออนุญาต</span><?= $form->field($model, 'owner_type')->inline()->label(false)->radioList(AppCar::itemAlias('ownertype')) ?>
+                <div class="col-md-3 col-xs-3 divbox-dlt">
+                    <span>ผู้ขออนุญาต</span><?= $form->field($model, 'owner_type')->label(false)->radioList(AppCar::itemAlias('ownertype')) ?>
                 </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3 divbox-dlt"> <span>ดำเนินการโดย</span><?= $form->field($model, 'operate_by')->label(false)->radioList(AppCar::itemAlias('operateby')) ?></div>
             </div><hr/>
             <div class="row">
                 <div class="col-md-2 col-xs-2">
@@ -229,9 +237,71 @@ use backend\modules\permitapp\models\PermitApp;
                     <?= $form->field($model, 'seat')->textInput()->label(false) ?>
                 </div>
             </div>         
-        </div>   
+        </div>  
     </div>
-
+    <div class="panel panel-danger">
+        <div class="panel-heading">แนบหลักฐานให้ครบถ้วน และถูกต้องตามรายการ</div>
+        <div class="penel-body well">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="listdoc">
+                        <ul>
+                            <li>หลักฐานแสดงรายละเอียดเกี่ยวกับการเดินทาง ผู้ขออนุญาต</li>
+                            <li>ภาพถ่ายแสดงหลักฐานการจดทะเบียนรถ ฉบับที่แปลไทยหรืออังกฤษ</li>
+                            <li>ภาพถ่ายหลักฐานประกันภัย</li>      
+                        </ul>
+                    </div>
+                    <div class="listdoc2">
+                        <ul>
+                            <li>หลักฐานแสดงรายละเอียดเกี่ยวกับการเดินทาง ผู้ขออนุญาต</li>
+                            <li>ภาพถ่ายแสดงหลักฐานการจดทะเบียนรถ ฉบับที่แปลไทยหรืออังกฤษ</li>
+                            <li>ภาพถ่ายหลักฐานประกันภัย</li> 
+                            <li>หนังสือยินยอมจากเจ้าของรถ</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="tan1">
+                        <ul>
+-
+                        </ul>
+                    </div>
+                    <div class="tan2">
+                        <ul>
+                            <li>ภาพถ่ายบัตรประจำตัวประชาชนหรือหนังสือรับรองการจทะเบียนนิติบุคคล</li>
+                            <li>ภาพถ่ายใบอนุญาตประกอบธุรกิจนำเที่ยว</li>
+                        </ul>
+                    </div>
+                    <div class="tan3">
+                        <ul>
+                            <li>ภาพถ่ายบัตรประจำตัวประชาชนหรือหนังสือรับรองการจทะเบียนนิติบุคคล</li>
+                            <li>ภาพถ่ายใบอนุญาตประกอบธุรกิจนำเที่ยว</li>
+                            <li>หนังสือมอบอำนาจ</li>
+                            <li>ภาพถ่ายบัตรประจำตัวประชาชนผู้รับมอบอำนาจ</li>  
+                        </ul>
+                    </div>
+                </div>
+            </div><span class="label label-danger">กรุณาตั้งชื่อไฟล์ ตามชนิดเอกสาร</span>         
+            <?=
+            $form->field($model, 'doc[]')->widget(FileInput::classname(), [
+                'options' => [
+                    //'accept' => 'image/*',
+                    'multiple' => true
+                ],
+                'pluginOptions' => [
+                    'initialPreview' => $model->initialPreview($model->doc, 'doc', 'file'),
+                    'initialPreviewConfig' => $model->initialPreview($model->doc, 'doc', 'config'),
+                    'allowedFileExtensions' => ['pdf', 'jpg'],
+                    'showPreview' => true,
+                    'showCaption' => true,
+                    'showRemove' => true,
+                    'showUpload' => true,
+                    'overwriteInitial' => false
+                ]
+            ])->label(false);
+            ?>
+        </div>
+    </div>
     <div class="row">
         <hr/>
         <div class="col-md-6 col-xs-6">
@@ -246,3 +316,51 @@ use backend\modules\permitapp\models\PermitApp;
     <?php ActiveForm::end(); ?>
 
 </div>
+<?php
+$this->registerJs("
+  var input1 = 'input[name=\"Zform[owner_type]\"]';
+  setHideInput(1,$(input1).val(),'.listdoc');
+  $(input1).click(function(val){
+    setHideInput(1,$(this).val(),'.listdoc');
+  });
+  
+  var input2 = 'input[name=\"Zform[owner_type]\"]';
+  setHideInput(2,$(input1).val(),'.listdoc2');
+  $(input1).click(function(val){
+    setHideInput(2,$(this).val(),'.listdoc2');
+  });
+  
+  var tan1 = 'input[name=\"Zform[operate_by]\"]';
+  setHideInput(1,$(tan1).val(),'.tan1');
+  $(tan1).click(function(val){
+    setHideInput(1,$(this).val(),'.tan1');
+  });
+  
+  var tan2 = 'input[name=\"Zform[operate_by]\"]';
+  setHideInput(2,$(tan2).val(),'.tan2');
+  $(tan2).click(function(val){
+    setHideInput(2,$(this).val(),'.tan2');
+  });
+  
+  var tan3 = 'input[name=\"Zform[operate_by]\"]';
+  setHideInput(3,$(tan3).val(),'.tan3');
+  $(tan3).click(function(val){
+    setHideInput(3,$(this).val(),'.tan3');
+  });
+
+
+  function setHideInput(set,value,objTarget)
+  {
+    console.log(set+'='+value);
+      if(set==value)
+      {
+        $(objTarget).show(10);
+      }
+      else
+      {
+        $(objTarget).hide(10);
+      }
+  }
+  
+");
+?>

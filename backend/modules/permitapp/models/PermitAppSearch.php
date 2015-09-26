@@ -5,28 +5,29 @@ namespace backend\modules\permitapp\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\permitapp\models\AppCar;
+use backend\modules\permitapp\models\PermitApp;
 
 /**
- * AppCarSearch represents the model behind the search form about `backend\modules\permitapp\models\AppCar`.
+ * PermitAppSearch represents the model behind the search form about `backend\modules\permitapp\models\PermitApp`.
  */
-class AppCarSearch extends AppCar {
-
+class PermitAppSearch extends PermitApp
+{
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            [['id', 'owner_type', 'car_type', 'gender', 'age', 'province', 'country', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'request_chanel', 'created_at', 'updated_at', 'cretaed_by', 'updated_by', 'approve_status', 'approve_by', 'approve_comment', 'dlt_office', 'dlt_br', 'brands', 'seat'], 'integer'],
-            [['fullname', 'owner_type', 'passport', 'address', 'telephone', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'approve_date', 'appearance', 'models', 'engine_no'], 'safe'],
-            [['weight', 'total_weight'], 'number'],
+            [['id', 'gender', 'age', 'province', 'country', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'request_chanel', 'created_at', 'updated_at', 'cretaed_by', 'updated_by', 'approve_status', 'approve_by', 'approve_comment', 'dlt_office', 'dlt_br'], 'integer'],
+            [['fullname', 'passport', 'address', 'telephone', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'approve_date'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios() {
+    public function scenarios()
+    {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -38,8 +39,9 @@ class AppCarSearch extends AppCar {
      *
      * @return ActiveDataProvider
      */
-    public function search($params) {
-        $query = AppCar::find();
+    public function search($params)
+    {
+        $query = PermitApp::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,8 +57,6 @@ class AppCarSearch extends AppCar {
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'car_type' => $this->car_type,
-            'owner_type' => $this->owner_type,
             'gender' => $this->gender,
             'age' => $this->age,
             'province' => $this->province,
@@ -79,26 +79,15 @@ class AppCarSearch extends AppCar {
             'approve_comment' => $this->approve_comment,
             'dlt_office' => $this->dlt_office,
             'dlt_br' => $this->dlt_br,
-            'brands' => $this->brands,
-            'weight' => $this->weight,
-            'total_weight' => $this->total_weight,
-            'seat' => $this->seat,
-            'car_color' => $this->car_color,
-            'carbody_no'=>$this->carbody_no,
         ]);
 
         $query->andFilterWhere(['like', 'fullname', $this->fullname])
-                ->andFilterWhere(['like', 'passport', $this->passport])
-                ->andFilterWhere(['like', 'address', $this->address])
-                ->andFilterWhere(['like', 'telephone', $this->telephone])
-                ->andFilterWhere(['like', 'car_enroll_country', $this->car_enroll_country])
-                ->andFilterWhere(['like', 'plates_number', $this->plates_number])
-                ->andFilterWhere(['like', 'appearance', $this->appearance])
-                ->andFilterWhere(['like', 'models', $this->models])
-                ->andFilterWhere(['like', 'car_color', $this->car_color])
-                ->andFilterWhere(['like', 'engine_no', $this->engine_no]);
+            ->andFilterWhere(['like', 'passport', $this->passport])
+            ->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'telephone', $this->telephone])
+            ->andFilterWhere(['like', 'car_enroll_country', $this->car_enroll_country])
+            ->andFilterWhere(['like', 'plates_number', $this->plates_number]);
 
         return $dataProvider;
     }
-
 }
