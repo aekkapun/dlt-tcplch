@@ -9,13 +9,13 @@ $this->title = 'Administration Access  ';
 ?>
 <div class="site-index">
 
-    <div class="body-content">
-        <div class="panel panel-dlt">
-            <div class="panel-heading">Panel heading without title</div>
-            <div class="panel-body">
-                Panel content
-            </div>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="glyphicon glyphicon-cog"></i> Administration Dashboard</h3>
         </div>
+        <div class="box-body">
+
+        </div><!-- /.box-body -->
     </div>
 </div>
 

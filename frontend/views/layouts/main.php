@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -38,20 +39,20 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'หน้าหลัก', 'url' => ['/site/index']],
+        ['label' => 'ข่าวประชาสัมพันธ์', 'url' => ['/site/about']],
+        ['label' => 'ดำเนินการขออนุญาต', 'url' =>Yii::$app->urlManagerBackend->createUrl(['site/index'])],
     ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-            'url' => ['/site/logout'],
-            'linkOptions' => ['data-method' => 'post']
-        ];
-    }
+//    if (Yii::$app->user->isGuest) {
+//        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+//        $menuItems[] = ['label' => 'Login', 'url' =>Yii::$app->urlManagerBackend->createUrl(['site/index'])];
+//    } else {
+//        $menuItems[] = [
+//            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+//            'url' => ['/site/logout'],
+//            'linkOptions' => ['data-method' => 'post']
+//        ];
+//    }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,

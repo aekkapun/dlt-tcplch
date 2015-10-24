@@ -8,6 +8,7 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'name' => 'ระบบการอนุญาตและออกเครื่องหมายการใช้รถ',
+    'language' => 'th',
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
@@ -38,6 +39,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/dlt-tcpl/frontend/web',
+            'scriptUrl' => '/dlt-tcpl/frontend/web/index.php',
+            'enablePrettyUrl' => false,
+            'showScriptName' => true,
+        ],
 //        'view' => [
 //            'theme' => [
 //                'pathMap' => [
@@ -50,6 +58,7 @@ return [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'site/*',
+            'site/font'
         //'admin/*',
 //'gii/*',
 //'debug/*',

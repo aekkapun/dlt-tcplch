@@ -11,28 +11,29 @@ use yii\widgets\ActiveForm;
 <div class="site-news-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'thump')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'short')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'views')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'create_at')->textInput() ?>
-
-    <?= $form->field($model, 'update_at')->textInput() ?>
-
-    <?= $form->field($model, 'create_by')->textInput() ?>
-
-    <?= $form->field($model, 'update_by')->textInput() ?>
-
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <div class="row">
+        <?= $form->errorSummary($model); ?>
+        <div class="col-md-12">
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <?= $form->field($model, 'thump')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-3">
+            <?= $form->field($model, 'short')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-3">
+            <?= $form->field($model, 'views')->textInput() ?>
+        </div>
+        <div class="col-md-3">
+             <?= $form->field($model, 'status')->textInput() ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12"><?= $form->field($model, 'content')->textarea(['rows' => 6]) ?></div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

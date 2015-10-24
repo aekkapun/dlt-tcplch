@@ -57,6 +57,9 @@ class SiteController extends Controller {
             ],
         ];
     }
+    public function actionFont(){
+        return $this->render('font');
+    }
 
     public function actionIndex() {
 

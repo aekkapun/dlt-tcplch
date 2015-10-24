@@ -1,0 +1,458 @@
+body {
+font-size:16px;
+}
+.woody-font-box {
+margin:10px;
+padding:5px;
+border-top:2px dotted #cccccc;
+}
+
+@font-face {
+    font-family: 'Book_Akhanake';
+    font-weight: normal;
+    font-style:  normal;
+    src: url('../fonts/book_akhanake-webfont/book_akhanake-webfont.eot'); /* IE9 Compat Modes */
+    src: local('Book_Akhanake'),
+         url('../fonts/book_akhanake-webfont/book_akhanake-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/book_akhanake-webfont/book_akhanake-webfont.woff') format('woff'), /* Modern browsers */
+         url('../fonts/book_akhanake-webfont/book_akhanake-webfont.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+@font-face {
+    font-family: 'Circular';
+    font-weight: normal;
+    font-style:  normal;
+    src: url('../fonts/circular-webfont/circular-webfont.eot'); /* IE9 Compat Modes */
+    src: local('Circular'),
+         url('../fonts/circular-webfont/circular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/circular-webfont/circular-webfont.woff') format('woff'), /* Modern browsers */
+         url('../fonts/circular-webfont/circular-webfont.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+    font-family: 'RSU';
+    font-weight: normal;
+    font-style:  normal;
+    src: url('../fonts/rsu_regular-webfont/rsu_regular-webfont.eot'); /* IE9 Compat Modes */
+    src: local('RSU'),
+         url('../fonts/rsu_regular-webfont/rsu_regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/rsu_regular-webfont/rsu_regular-webfont.woff') format('woff'), /* Modern browsers */
+         url('../fonts/rsu_regular-webfont/rsu_regular-webfont.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+    font-family: 'Supermarket';
+    font-weight: normal;
+    font-style:  normal;
+    src: url('../fonts/supermarket-webfont/supermarket-webfont.eot'); /* IE9 Compat Modes */
+    src: local('Supermarket'),
+         url('../fonts/supermarket-webfont/supermarket-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/supermarket-webfont/supermarket-webfont.woff') format('woff'), /* Modern browsers */
+         url('../fonts/supermarket-webfont/supermarket-webfont.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+    font-family: 'iannnnnBKK';
+    font-weight: normal;
+    font-style:  normal;
+    src: url('../fonts/2006_iannnnnbkk-webfont/2006_iannnnnbkk-webfont.eot'); /* IE9 Compat Modes */
+    src: local('iannnnnBKK'),
+         url('../fonts/2006_iannnnnbkk-webfont/2006_iannnnnbkk-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/2006_iannnnnbkk-webfont/2006_iannnnnbkk-webfont.woff') format('woff'), /* Modern browsers */
+         url('../fonts/2006_iannnnnbkk-webfont/2006_iannnnnbkk-webfont.ttf') format('truetype'); /* Safari, Android, iOS */
+}
+/*THBaijam*/
+@font-face {
+    font-family: 'THBaijam';
+    src: url('../fonts/th_baijam-webfont/th_baijam_bold_italic-webfont.eot');
+    src: url('../fonts/th_baijam-webfont/th_baijam_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_baijam-webfont/th_baijam_bold_italic-webfont.woff') format('woff'),
+         url('../fonts/th_baijam-webfont/th_baijam_bold_italic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'THBaijam';
+    src: url('../fonts/th_baijam-webfont/th_baijam_bold-webfont.eot');
+    src: url('../fonts/th_baijam-webfont/th_baijam_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_baijam-webfont/th_baijam_bold-webfont.woff') format('woff'),
+         url('../fonts/th_baijam-webfont/th_baijam_bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'THBaijam';
+    src: url('../fonts/th_baijam-webfont/th_baijam_italic-webfont.eot');
+    src: url('../fonts/th_baijam-webfont/th_baijam_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_baijam-webfont/th_baijam_italic-webfont.woff') format('woff'),
+         url('../fonts/th_baijam-webfont/th_baijam_italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'THBaijam';
+    src: url('../fonts/th_baijam-webfont/th_baijam-webfont.eot');
+    src: url('../fonts/th_baijam-webfont/th_baijam-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_baijam-webfont/th_baijam-webfont.woff') format('woff'),
+         url('../fonts/th_baijam-webfont/th_baijam-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*THChakraPetch*/
+@font-face {
+    font-family: 'THChakraPetch';
+    src: url('../fonts/th_chakra_petch-webfont/th_chakra_petch_bold_italic-webfont.eot');
+    src: url('../fonts/th_chakra_petch-webfont/th_chakra_petch_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_chakra_petch-webfont/th_chakra_petch_bold_italic-webfont.woff') format('woff'),
+         url('../fonts/th_chakra_petch-webfont/th_chakra_petch_bold_italic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'THChakraPetch';
+    src: url('../fonts/th_chakra_petch-webfont/th_chakra_petch_bold-webfont.eot');
+    src: url('../fonts/th_chakra_petch-webfont/th_chakra_petch_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_chakra_petch-webfont/th_chakra_petch_bold-webfont.woff') format('woff'),
+         url('../fonts/th_chakra_petch-webfont/th_chakra_petch_bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'THChakraPetch';
+    src: url('../fonts/th_chakra_petch-webfont/th_chakra_petch_italic-webfont.eot');
+    src: url('../fonts/th_chakra_petch-webfont/th_chakra_petch_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_chakra_petch-webfont/th_chakra_petch_italic-webfont.woff') format('woff'),
+         url('../fonts/th_chakra_petch-webfont/th_chakra_petch_italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'THChakraPetch';
+    src: url('../fonts/th_chakra_petch-webfont/th_chakra_petch-webfont.eot');
+    src: url('../fonts/th_chakra_petch-webfont/th_chakra_petch-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_chakra_petch-webfont/th_chakra_petch-webfont.woff') format('woff'),
+         url('../fonts/th_chakra_petch-webfont/th_chakra_petch-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/*THCharmofAU*/
+@font-face {
+    font-family: 'THCharmofAU';
+    src: url('../fonts/th_charm_of_au-webfont/th_charm_of_au-webfont.eot');
+    src: url('../fonts/th_charm_of_au-webfont/th_charm_of_au-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_charm_of_au-webfont/th_charm_of_au-webfont.woff') format('woff'),
+         url('../fonts/th_charm_of_au-webfont/th_charm_of_au-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/*THCharmonman*/
+@font-face {
+    font-family: 'THCharmonman';
+    src: url('../fonts/th_charmonman-webfont/th_charmonman_bold-webfont.eot');
+    src: url('../fonts/th_charmonman-webfont/th_charmonman_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_charmonman-webfont/th_charmonman_bold-webfont.woff') format('woff'),
+         url('../fonts/th_charmonman-webfont/th_charmonman_bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'THCharmonman';
+    src: url('../fonts/th_charmonman-webfont/th_charmonman-webfont.eot');
+    src: url('../fonts/th_charmonman-webfont/th_charmonman-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_charmonman-webfont/th_charmonman-webfont.woff') format('woff'),
+         url('../fonts/th_charmonman-webfont/th_charmonman-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/*THFahkwang*/
+
+@font-face {
+    font-family: 'THFahkwang';
+    src: url('../fonts/th_fahkwang-webfont/th_fahkwang_bold_italic-webfont.eot');
+    src: url('../fonts/th_fahkwang-webfont/th_fahkwang_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_fahkwang-webfont/th_fahkwang_bold_italic-webfont.woff') format('woff'),
+         url('../fonts/th_fahkwang-webfont/th_fahkwang_bold_italic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THFahkwang';
+    src: url('../fonts/th_fahkwang-webfont/th_fahkwang_bold-webfont.eot');
+    src: url('../fonts/th_fahkwang-webfont/th_fahkwang_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_fahkwang-webfont/th_fahkwang_bold-webfont.woff') format('woff'),
+         url('../fonts/th_fahkwang-webfont/th_fahkwang_bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'THFahkwang';
+    src: url('../fonts/th_fahkwang-webfont/th_fahkwang_italic-webfont.eot');
+    src: url('../fonts/th_fahkwang-webfont/th_fahkwang_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_fahkwang-webfont/th_fahkwang_italic-webfont.woff') format('woff'),
+         url('../fonts/th_fahkwang-webfont/th_fahkwang_italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THFahkwang';
+    src: url('../fonts/th_fahkwang-webfont/th_fahkwang-webfont.eot');
+    src: url('../fonts/th_fahkwang-webfont/th_fahkwang-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_fahkwang-webfont/th_fahkwang-webfont.woff') format('woff'),
+         url('../fonts/th_fahkwang-webfont/th_fahkwang-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/*****THK2DJuly8*****/
+@font-face {
+    font-family: 'THK2DJuly8';
+    src: url('../fonts/th_k2d_july8-webfont/th_k2d_july8_bold_italic-webfont.eot');
+    src: url('../fonts/th_k2d_july8-webfont/th_k2d_july8_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_k2d_july8-webfont/th_k2d_july8_bold_italic-webfont.woff') format('woff'),
+         url('../fonts/th_k2d_july8-webfont/th_k2d_july8_bold_italic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THK2DJuly8';
+    src: url('../fonts/th_k2d_july8-webfont/th_k2d_july8_bold-webfont.eot');
+    src: url('../fonts/th_k2d_july8-webfont/th_k2d_july8_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_k2d_july8-webfont/th_k2d_july8_bold-webfont.woff') format('woff'),
+         url('../fonts/th_k2d_july8-webfont/th_k2d_july8_bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'THK2DJuly8';
+    src: url('../fonts/th_k2d_july8-webfont/th_k2d_july8_italic-webfont.eot');
+    src: url('../fonts/th_k2d_july8-webfont/th_k2d_july8_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_k2d_july8-webfont/th_k2d_july8_italic-webfont.woff') format('woff'),
+         url('../fonts/th_k2d_july8-webfont/th_k2d_july8_italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THK2DJuly8';
+    src: url('../fonts/th_k2d_july8-webfont/th_k2d_july8-webfont.eot');
+    src: url('../fonts/th_k2d_july8-webfont/th_k2d_july8-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_k2d_july8-webfont/th_k2d_july8-webfont.woff') format('woff'),
+         url('../fonts/th_k2d_july8-webfont/th_k2d_july8-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/***THKoHo****/
+@font-face {
+    font-family: 'THKoHo';
+    src: url('../fonts/th_koho-webfont/th_koho-webfont.eot');
+    src: url('../fonts/th_koho-webfont/th_koho-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_koho-webfont/th_koho-webfont.woff') format('woff'),
+         url('../fonts/th_koho-webfont/th_koho-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/********THKrub*******/
+
+@font-face {
+    font-family: 'THKrub';
+    src: url('../fonts/th_krub-webfont/th_krub_bold_italic-webfont.eot');
+    src: url('../fonts/th_krub-webfont/th_krub_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_krub-webfont/th_krub_bold_italic-webfont.woff') format('woff'),
+         url('../fonts/th_krub-webfont/th_krub_bold_italic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THKrub';
+    src: url('../fonts/th_krub-webfont/th_krub_bold-webfont.eot');
+    src: url('../fonts/th_krub-webfont/th_krub_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_krub-webfont/th_krub_bold-webfont.woff') format('woff'),
+         url('../fonts/th_krub-webfont/th_krub_bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'THKrub';
+    src: url('../fonts/th_krub-webfont/th_krub_italic-webfont.eot');
+    src: url('../fonts/th_krub-webfont/th_krub_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_krub-webfont/th_krub_italic-webfont.woff') format('woff'),
+         url('../fonts/th_krub-webfont/th_krub_italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THKrub';
+    src: url('../fonts/th_krub-webfont/th_krub-webfont.eot');
+    src: url('../fonts/th_krub-webfont/th_krub-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_krub-webfont/th_krub-webfont.woff') format('woff'),
+         url('../fonts/th_krub-webfont/th_krub-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/*************THMaliGrade6****************/
+@font-face {
+    font-family: 'THMaliGrade6';
+    src: url('../fonts/th_mali_grade6-webfont/th_mali_grade6-webfont.eot');
+    src: url('../fonts/th_mali_grade6-webfont/th_mali_grade6-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_mali_grade6-webfont/th_mali_grade6-webfont.woff') format('woff'),
+         url('../fonts/th_mali_grade6-webfont/th_mali_grade6-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/*******THNiramitAS***********/
+@font-face {
+    font-family: 'THNiramitAS';
+    src: url('../fonts/th_niramit_as-webfont/th_niramit_as_italic-webfont.eot');
+    src: url('../fonts/th_niramit_as-webfont/th_niramit_as_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_niramit_as-webfont/th_niramit_as_italic-webfont.woff') format('woff'),
+         url('../fonts/th_niramit_as-webfont/th_niramit_as_italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THNiramitAS';
+    src: url('../fonts/th_niramit_as-webfont/th_niramit_as_bold-webfont.eot');
+    src: url('../fonts/th_niramit_as-webfont/th_niramit_as_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_niramit_as-webfont/th_niramit_as_bold-webfont.woff') format('woff'),
+         url('../fonts/th_niramit_as-webfont/th_niramit_as_bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'THNiramitAS';
+    src: url('../fonts/th_niramit_as-webfont/th_niramit_as_bold_italic-webfont.eot');
+    src: url('../fonts/th_niramit_as-webfont/th_niramit_as_bold_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_niramit_as-webfont/th_niramit_as_bold_italic-webfont.woff') format('woff'),
+         url('../fonts/th_niramit_as-webfont/th_niramit_as_bold_italic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THNiramitAS';
+    src: url('../fonts/th_niramit_as-webfont/th_niramit_as-webfont.eot');
+    src: url('../fonts/th_niramit_as-webfont/th_niramit_as-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_niramit_as-webfont/th_niramit_as-webfont.woff') format('woff'),
+         url('../fonts/th_niramit_as-webfont/th_niramit_as-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/*******THSarabunNew**********/
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('../fonts/thsarabunnew-webfont/thsarabunnew-webfont.eot');
+    src: url('../fonts/thsarabunnew-webfont/thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/thsarabunnew-webfont/thsarabunnew-webfont.woff') format('woff'),
+         url('../fonts/thsarabunnew-webfont/thsarabunnew-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('../fonts/thsarabunnew-webfont/thsarabunnew_bolditalic-webfont.eot');
+    src: url('../fonts/thsarabunnew-webfont/thsarabunnew_bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/thsarabunnew-webfont/thsarabunnew_bolditalic-webfont.woff') format('woff'),
+         url('../fonts/thsarabunnew-webfont/thsarabunnew_bolditalic-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('../fonts/thsarabunnew-webfont/thsarabunnew_italic-webfont.eot');
+    src: url('../fonts/thsarabunnew-webfont/thsarabunnew_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/thsarabunnew-webfont/thsarabunnew_italic-webfont.woff') format('woff'),
+         url('../fonts/thsarabunnew-webfont/thsarabunnew_italic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+
+}
+
+@font-face {
+    font-family: 'THSarabunNew';
+    src: url('../fonts/thsarabunnew-webfont/thsarabunnew_bold-webfont.eot');
+    src: url('../fonts/thsarabunnew-webfont/thsarabunnew_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/thsarabunnew-webfont/thsarabunnew_bold-webfont.woff') format('woff'),
+         url('../fonts/thsarabunnew-webfont/thsarabunnew_bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'THSrisakdi';
+    src: url('../fonts/th_srisakdi-webfont/th_srisakdi_bold-webfont.eot');
+    src: url('../fonts/th_srisakdi-webfont/th_srisakdi_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_srisakdi-webfont/th_srisakdi_bold-webfont.woff') format('woff'),
+         url('../fonts/th_srisakdi-webfont/th_srisakdi_bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'THSrisakdi';
+    src: url('../fonts/th_srisakdi-webfont/th_srisakdi-webfont.eot');
+    src: url('../fonts/th_srisakdi-webfont/th_srisakdi-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/th_srisakdi-webfont/th_srisakdi-webfont.woff') format('woff'),
+         url('../fonts/th_srisakdi-webfont/th_srisakdi-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.Book_Akhanake {font-family:"Book_Akhanake", tahoma,ms sans serif;}
+.Circular {font-family:"Circular", tahoma,ms sans serif;}
+.RSU {font-family:"RSU", tahoma,ms sans serif;}
+.Supermarket {font-family:"Supermarket", tahoma,ms sans serif;}
+.iannnnnBKK {font-family:"iannnnnBKK", tahoma,ms sans serif;}
+.THBaijam {font-family:"THBaijam", tahoma,ms sans serif;}
+.THChakraPetch {font-family:"THChakraPetch", tahoma,ms sans serif;}
+.THCharmofAU {font-family:"THCharmofAU", tahoma,ms sans serif;}
+.THCharmonman {font-family:"THCharmonman", tahoma,ms sans serif;}
+.THFahkwang {font-family:"THFahkwang", tahoma,ms sans serif;}
+.THK2DJuly8 {font-family:"THK2DJuly8", tahoma,ms sans serif;}
+.THKoHo {font-family:"THKoHo", tahoma,ms sans serif;}
+.THKrub {font-family:"THKrub", tahoma,ms sans serif;}
+.THMaliGrade6 {font-family:"THMaliGrade6", tahoma,ms sans serif;}
+.THNiramitAS {font-family:"THNiramitAS", tahoma,ms sans serif;}
+.THSarabunNew {font-family:"THSarabunNew", tahoma,ms sans serif;}
+.THSrisakdi {font-family:"THSrisakdi", tahoma,ms sans serif;}

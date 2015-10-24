@@ -13,10 +13,29 @@ use yii\web\NotFoundHttpException;
 
         <!-- sidebar-menu. -- Start -->
 
+        <?php
+//        Nav::widget(
+//                [
+//                    'encodeLabels' => false,
+//                    'options' => ['class' => 'sidebar-menu'],
+//                    'items' => [
+//                        '<li class="header">Department Land of Transport</li>',
+//                        ['label' => '<i class="fa fa-file-code-o"></i><span>Gii</span>', 'url' => ['/gii']],
+//                        ['label' => '<i class="fa fa-dashboard"></i><span>Debug</span>', 'url' => ['/debug']],
+//                        [
+//                            'label' => '<i class="glyphicon glyphicon-lock"></i><span>Sing in</span>', //for basic
+//                            'url' => ['/site/login'],
+//                            'visible' => Yii::$app->user->isGuest
+//                        ],
+//                    ],
+//                ]
+//        );
+        ?>
+
         <ul class="sidebar-menu">
             <li>
                 <a href="<?= Yii::$app->homeUrl ?>" class="navbar-link">
-                    <i class="fa fa-angle-down"></i> <span class="text-info">Menu</span>
+                    <i class="fa fa-angle-down"></i> <span class="text-dafault"> <i class="fa fa-home"></i> เมนูหลัก</span>
                 </a>
             </li>
             <?php if ($this->context->module->id == 'customs')  ?>

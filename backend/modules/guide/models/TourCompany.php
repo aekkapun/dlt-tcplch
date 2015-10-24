@@ -1,7 +1,7 @@
 <?php
 
 namespace backend\modules\guide\models;
-
+use backend\modules\guide\models\TourCompany;
 use Yii;
 
 /**
@@ -50,7 +50,8 @@ class TourCompany extends \yii\db\ActiveRecord
             [['license_no'], 'string', 'max' => 8],
             [['trader_name', 'trader_name_en'], 'string', 'max' => 128],
             [['category', 'address', 'telephone', 'email'], 'string', 'max' => 255],
-            [['province', 'amphur', 'district', 'zipcode'], 'string', 'max' => 5]
+            [['province', 'amphur', 'district', 'zipcode'], 'string', 'max' => 5],
+            ['license_no', 'exist', 'targetClass' => TourCompany::className()] 
         ];
     }
 
@@ -86,4 +87,5 @@ class TourCompany extends \yii\db\ActiveRecord
     public function getLicenseName(){
         return $this->license_no .'-'.$this->trader_name;
     }
+    
 }

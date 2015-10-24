@@ -12,13 +12,18 @@ use backend\modules\configuration\models\Province;
 use backend\modules\configuration\models\Amphur;
 use backend\modules\configuration\models\District;
 use kartik\widgets\DepDrop;
-use kartik\widgets\TypeaheadBasic;
 //use kartik\widgets\DatePicker;
 use kartik\date\DatePicker;
 use backend\modules\permitapp\models\AppCar;
 use backend\modules\permitapp\models\PermitApp;
 use backend\modules\permitapp\models\Document;
 use backend\modules\permitapp\models\DocumentSearch;
+use backend\modules\configuration\models\Countries;
+use backend\modules\configuration\models\Kind;
+use backend\modules\configuration\models\CarBrands;
+use backend\modules\configuration\models\CarColor;
+use kartik\popover\PopoverX;
+use kartik\widgets\TypeaheadBasic;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\permitapp\models\AppCar */
@@ -27,9 +32,10 @@ use backend\modules\permitapp\models\DocumentSearch;
 
 <div class="app-car-form">
 
+
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="row">
-        <?= $form->errorSummary($model); ?>
+       <?= $form->errorSummary($model); ?>
     </div>
     <div class="panel panel-success">
         <div class="panel-heading">ข้อมูล รายละเอียดคำขอ</div>
@@ -74,7 +80,18 @@ use backend\modules\permitapp\models\DocumentSearch;
                     <span>จังหวัด</span><?= $form->field($model, 'province')->textInput(['placeholder' => 'จังหวัด'])->label(false) ?>
                 </div>
                 <div class="col-md-3 col-xs-3">
-                    <span>ประเทศ</span><?= $form->field($model, 'country')->textInput(['placeholder' => 'ประเทศ'])->label(false) ?>
+                    <span>ประเทศ</span>
+                    <?=
+                    $form->field($model, 'country')->widget(Select2::classname(), [
+                        'data' => ArrayHelper::map(Countries::find()->all(), 'id', 'country_name'),
+                        'options' => ['placeholder' => 'เลือกประเทศ ...',
+                            'id' => 'ddl-countries',
+                        ],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ])->label(false);
+                    ?>
                 </div>
             </div>
             <div class="row">
@@ -95,25 +112,25 @@ use backend\modules\permitapp\models\DocumentSearch;
             <div class="row">
                 <div class="col-xs-6"><span>เข้ามาในราชอาณาจักรเป็นการชั่วคราวเพื่อใช้ในการท่องเที่ยว  ตั้งแต่วันที่ </span>
                     <?=
-                    $form->field($model, 'start_date')->label(false)->widget(DatePicker::ClassName(), [
-                        'name' => 'check_start_date',
+                    $form->field($model, 'start_date')->widget(DatePicker::ClassName(), [
+                        //'name' => 'check_start_date',
                         // 'value' => date('d-M-Y', strtotime('+2 days')),
                         'options' => ['placeholder' => 'วันที่เดินทางเข้าประเทศ...'],
                         'pluginOptions' => [
-                            'format' => 'dd/mm/yyyy',
+                            'format' => 'yyyy-mm-dd',
                             'todayHighlight' => true
                         ]
-                    ]);
+                    ])->label(false);
                     ?>
                 </div>
                 <div class="col-xs-4"><span>ถึงวันที่</span>
+
                     <?=
-                    $form->field($model, 'end_date')->widget(DatePicker::ClassName(), [
-                        'name' => 'check_start_date',
-                        // 'value' => date('d-M-Y', strtotime('+2 days')),
-                        'options' => ['placeholder' => 'วันที่เดินทางออกประเทศ...'],
+                    $form->field($model, 'end_date')->widget(DatePicker::className(), [
+                        'language' => 'th',
+                        'options' => ['placeholder' => 'วันที่เดินทางออกประเทศ ...'],
                         'pluginOptions' => [
-                            'format' => 'dd/mm/yyyy',
+                            'format' => 'yyyy-mm-dd',
                             'todayHighlight' => true
                         ]
                     ])->label(false);
@@ -131,13 +148,20 @@ use backend\modules\permitapp\models\DocumentSearch;
                         ],
                     ])->label(false);
                     ?>
+                    <?php
+//                    $form->field($model, 'start_province')->dropdownList(
+//                            ArrayHelper::map(Province::find()->where(['BOR_FLAG' => 1])->all(), 'PRV_CODE', 'PRV_DESC'), [
+//                        'id' => 'ddl-province-start',
+//                        'prompt' => 'เลือกจังหวัด'
+//                    ])->label(false);
+                    ?>
                 </div>
                 <div class="col-xs-4"><span>ด่านพรมแดน</span>
                     <?=
                     $form->field($model, 'start_border_point')->widget(\kartik\depdrop\DepDrop::className(), [
                         'options' => ['id' => 'ddl-borderpoint',
                             'placeholder' => 'เข้า ณ ด่านพรมแดน ...'],
-                        'data' => [],
+                        'data' => $border_start,
                         'pluginOptions' => [
                             'depends' => ['ddl-province-start'],
                             'placeholder' => 'เลือก - ด่านพรมแดน...',
@@ -179,8 +203,10 @@ use backend\modules\permitapp\models\DocumentSearch;
                 <div class="col-xs-4"><span>ด่านพรมแดน</span>
                     <?=
                     $form->field($model, 'out_border_point')->widget(\kartik\depdrop\DepDrop::className(), [
-                        'options' => ['id' => 'ddl-borderpoint-out', 'placeholder' => 'ออก ณ ด่านพรมแดน...'],
-                        'data' => [],
+                        'options' => ['id' => 'ddl-borderpoint-out', 
+                            'placeholder' => 'ออก ณ ด่านพรมแดน...'
+                            ],
+                        'data' => $border_out,
                         'pluginOptions' => [
                             'depends' => ['ddl-province-out'],
                             'placeholder' => 'เลือก - ด่านพรมแดน...',
@@ -192,11 +218,11 @@ use backend\modules\permitapp\models\DocumentSearch;
                 </div>
             </div>
 
-            <?php // $form->field($model, 'request_chanel')->textInput() ?>
+            <?php // $form->field($model, 'request_chanel')->textInput()         ?>
 
-            <?php // $form->field($model, 'dlt_office')->textInput() ?>
+            <?php // $form->field($model, 'dlt_office')->textInput()       ?>
 
-            <?php // $form->field($model, 'dlt_br')->textInput() ?>
+            <?php // $form->field($model, 'dlt_br')->textInput()         ?>
         </div>
     </div>
 
@@ -205,10 +231,29 @@ use backend\modules\permitapp\models\DocumentSearch;
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-4"><span>ลักษณะรถ</span>
-                    <?= $form->field($model, 'appearance')->textInput(['maxlength' => true])->label(false) ?>
+                    <?php // $form->field($model, 'appearance')->textInput(['maxlength' => true])->label(false)  ?>
+
+                    <?=
+                    TypeaheadBasic::widget([
+                        'model' => $model,
+                        'attribute' => 'appearance',
+                        'data' => ArrayHelper::map(Kind::find()->all(), 'id', 'name'),
+                        'options' => ['placeholder' => 'Filter as you type ...'],
+                        'pluginOptions' => ['highlight' => true],
+                    ]);
+                    ?>
                 </div>
                 <div class="col-xs-4"><span>ยี่ห้อรถ</span>
-                    <?= $form->field($model, 'brands')->textInput()->label(false) ?>
+                    <?php // $form->field($model, 'brands')->textInput()->label(false)  ?>
+                    <?=
+                    TypeaheadBasic::widget([
+                        'model' => $model,
+                        'attribute' => 'brands',
+                        'data' => ArrayHelper::map(CarBrands::find()->all(), 'id', 'desc'),
+                        'options' => ['placeholder' => 'Filter as Car Brands ...'],
+                        'pluginOptions' => ['highlight' => true],
+                    ]);
+                    ?>
                 </div>
                 <div class="col-xs-4"><span>แบบรถ</span>
                     <?= $form->field($model, 'models')->textInput(['maxlength' => true])->label(false) ?>
@@ -216,12 +261,20 @@ use backend\modules\permitapp\models\DocumentSearch;
             </div>
             <div class="row">
                 <div class="col-xs-4"><span>สีรถ</span>
-                    <?= $form->field($model, 'car_color')->textInput()->label(false) ?>
+                    <?=
+                    TypeaheadBasic::widget([
+                        'model' => $model,
+                        'attribute' => 'car_color',
+                        'data' => ArrayHelper::map(CarColor::find()->all(), 'id', 'color'),
+                        'options' => ['placeholder' => 'Filter as Car Color ...'],
+                        'pluginOptions' => ['highlight' => true],
+                    ]);
+                    ?>
                 </div>
                 <div class="col-xs-4"><span>น้ำหนักรถ</span>
                     <?= $form->field($model, 'weight')->textInput()->label(false) ?>
                 </div>
-                <div class="col-xs-4"><span>น้ำหนักรถ</span>
+                <div class="col-xs-4"><span>น้ำหนักรวม</span>
                     <?= $form->field($model, 'total_weight')->textInput()->label(false) ?>
                 </div>
 
@@ -263,7 +316,7 @@ use backend\modules\permitapp\models\DocumentSearch;
                 <div class="col-md-6">
                     <div class="tan1">
                         <ul>
--
+                            -
                         </ul>
                     </div>
                     <div class="tan2">
@@ -281,16 +334,27 @@ use backend\modules\permitapp\models\DocumentSearch;
                         </ul>
                     </div>
                 </div>
-            </div><span class="label label-danger">กรุณาตั้งชื่อไฟล์ ตามชนิดเอกสาร</span>         
+            </div><span class="label label-danger">กรุณาตั้งชื่อไฟล์ ตามชนิดเอกสาร</span>
+            <?php
+            echo PopoverX::widget([
+                'header' => 'การตั้งชื่อเอกสาร',
+                'type' => PopoverX::TYPE_INFO,
+                'placement' => PopoverX::ALIGN_TOP,
+                'size' => PopoverX::SIZE_LARGE,
+                'content' => Html::img('images/sampledoc.gif'),
+                //'footer' => 'เพื่อความรวดเร็วในการตรวจสอบข้อมูล',
+                'toggleButton' => ['label' => 'คลิก เพื่อดูตัวอย่าง', 'class' => 'label label-primary'],
+            ]);
+            ?>
             <?=
-            $form->field($model, 'doc[]')->widget(FileInput::classname(), [
+            $form->field($model, 'docs[]')->widget(FileInput::classname(), [
                 'options' => [
                     //'accept' => 'image/*',
                     'multiple' => true
                 ],
                 'pluginOptions' => [
-                    'initialPreview' => $model->initialPreview($model->doc, 'doc', 'file'),
-                    'initialPreviewConfig' => $model->initialPreview($model->doc, 'doc', 'config'),
+                    'initialPreview' => $model->initialPreview($model->docs, 'docs', 'file'),
+                    'initialPreviewConfig' => $model->initialPreview($model->docs, 'docs', 'config'),
                     'allowedFileExtensions' => ['pdf', 'jpg'],
                     'showPreview' => true,
                     'showCaption' => true,
@@ -311,7 +375,6 @@ use backend\modules\permitapp\models\DocumentSearch;
             <?= Html::resetButton($model->isNewRecord ? '<i class="glyphicon glyphicon-refresh"></i> เคลียร์ข้อมูล' : 'คืนค่าเดิม', ['class' => ($model->isNewRecord ? 'btn btn-danger' : 'btn btn-warning') . ' btn-lg btn-block']) ?>
         </div> 
     </div>
-
 
     <?php ActiveForm::end(); ?>
 

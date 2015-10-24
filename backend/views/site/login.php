@@ -26,6 +26,7 @@ $this->title = 'An Unauthorized cannot Access.';
 
                     <div class="form-group">
                         <?= Html::submitButton('Login', ['class' => 'btn btn-lg btn-danger btn-block', 'name' => 'login-button']) ?>
+                        <?= Html::resetButton('Login', ['class' => 'btn btn-lg btn-danger btn-block', 'name' => 'login-button']) ?>
                     </div>
 
                     <?php ActiveForm::end(); ?>

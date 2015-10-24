@@ -10,7 +10,7 @@ use yii\helpers\Html;
         <ul class="sidebar-menu">
             <li>
                 <a href="#" class="navbar-link">
-                    <i class="fa fa-angle-down"></i> <span class="text-info">Menu</span>
+                    <i class="fa fa-angle-down"></i> <span class="text-warning">เมนูหลัก</span>
                 </a>
             </li>
             <?php if (Yii::$app->user->can('/configuration/default/index')) { ?>
@@ -24,42 +24,42 @@ use yii\helpers\Html;
             }
             if (Yii::$app->user->can('/guide/default/index')) {
                 ?>
-                <li><?= Html::a('<i class="fa fa-graduation-cap"></i> <span>Guide Management</span>', ['/guide/default/index']); ?></li>
+                <li><?= Html::a('<i class="fa fa-graduation-cap"></i> <span>บริษัท</span>', ['/guide/default/index']); ?></li>
                 <?php
             }
             if (Yii::$app->user->can('/police/default/index')) {
                 ?>
-                <li><?= Html::a('<i class="fa fa-users"></i> <span>Police</span>', ['/police/default/index']); ?></li>
+                <li><?= Html::a('<i class="fa fa-users"></i> <span>กองตรวจการ</span>', ['/police/default/index']); ?></li>
                 <?php
             }
             if (Yii::$app->user->can('/customs/default/index')) {
                 ?>
-                <li><?= Html::a('<i class="fa fa-user"></i> <span>Customs</span>', ['/customs/default/index']); ?></li>
+                <li><?= Html::a('<i class="fa fa-user"></i> <span>กรมศุลกากร</span>', ['/customs/default/index']); ?></li>
                 <?php
             }
             if (Yii::$app->user->can('/dlt/default/index')) {
                 ?>
-                <li><?= Html::a('<i class="fa fa-inr"></i> <span>Department Land of Transport</span>', ['/dlt/default/index']); ?></li>
+                <li><?= Html::a('<i class="fa fa-inr"></i> <span>กรมการขนส่งทางบก</span>', ['/dlt/default/index']); ?></li>
                 <?php
             }
             if (Yii::$app->user->can('/report/default/index')) {
                 ?>
-                <li><?= Html::a('<i class="fa fa-bar-chart"></i> <span>Reports Center</span>', ['/report/default/index']); ?></li>
+                <li><?= Html::a('<i class="fa fa-bar-chart"></i> <span>ระบบรายงาน Center</span>', ['/report/default/index']); ?></li>
                 <?php
             }
             if (Yii::$app->user->can('/usermanagement/default/index')) {
                 ?>
-                <li><?= Html::a('<i class="fa fa-user"></i> <span>User Management Center</span>', ['/usermanagement/default/index']); ?></li>
+                <li><?= Html::a('<i class="fa fa-user"></i> <span>ระบบจัดการผู้ใช้งาน</span>', ['/usermanagement/default/index']); ?></li>
                 <?php
             }
             if (Yii::$app->user->can('/permitapp/default/index')) {
                 ?>
-                <li><?= Html::a('<i class="fa fa-file"></i> <span>Permit Application Center</span>', ['/permitapp/default/index']); ?></li>
+                <li><?= Html::a('<i class="fa fa-file"></i> <span>ระบบการอนุญาต</span>', ['/permitapp/default/index']); ?></li>
                 <?php
             }
             if (Yii::$app->user->can('/admin/default/index')) {
                 ?>
-                <li><?= Html::a('<i class="fa fa-user-secret"></i> <span>Admin Rbac</span>', ['/admin/']); ?></li>
+                <li><?= Html::a('<i class="fa fa-user-secret"></i> <span>การกำหนดสิทธิ์ การใช้งาน</span>', ['/admin/']); ?></li>
             <?php } ?>
 
         </ul>

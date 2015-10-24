@@ -19,5 +19,4 @@ $this->title = 'Administration Panel';
 
 
 
-
 </div>

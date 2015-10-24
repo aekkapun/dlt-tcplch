@@ -24,28 +24,26 @@ use Yii;
  * @property Userdlt[] $userdlts
  * @property Userpolice[] $userpolices
  */
-class User extends \yii\db\ActiveRecord
-{
+class User extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'user';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
+            [['username', 'password_hash'], 'required'],
             [['status', 'created_at', 'updated_at', 'is_block', 'user_type'], 'integer'],
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
-            [['email'], 'unique'],
+           //[['email'], 'unique'],
             [['password_reset_token'], 'unique']
         ];
     }
@@ -53,8 +51,7 @@ class User extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'username' => 'Username',
@@ -73,36 +70,45 @@ class User extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getLoginDetails()
-    {
+    public function getLoginDetails() {
         return $this->hasMany(LoginDetails::className(), ['login_user_id' => 'id']);
     }
-    
-    public function getUserType(){
-        return $this->hasOne(UserType::className(), ['id'=>'user_type']);
+
+    public function getUserType() {
+        return $this->hasOne(UserType::className(), ['id' => 'user_type']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsercustoms()
-    {
+    public function getUsercustoms() {
         return $this->hasMany(Usercustoms::className(), ['user_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserdlts()
-    {
+    public function getUserdlts() {
         return $this->hasMany(Userdlt::className(), ['user_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserpolices()
-    {
+    public function getUserpolices() {
         return $this->hasMany(Userpolice::className(), ['user_id' => 'id']);
     }
+
+    public function setPassword($password) {
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+        public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+        public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
+    }
+
 }

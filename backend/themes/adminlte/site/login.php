@@ -49,6 +49,9 @@ $fieldOptions2 = [
             </div>
             <!-- /.col -->
         </div>
+        <div class="row">
+            <?= Html::a(' กลับหน้าหลัก', Yii::$app->urlManagerFrontend->createUrl(['site/index']), ['class' => 'btn btn-inverse btn-lglg  fa fa-share']) ?>
+        </div>
 
 
         <?php ActiveForm::end(); ?>

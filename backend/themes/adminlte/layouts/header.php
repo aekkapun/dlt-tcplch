@@ -10,8 +10,8 @@ use yii\bootstrap\NavBar;
 
 <header class="main-header">
     <?php // Html::img('@web/images/logoadmin.png', ['alt' => Yii::$app->name]) ?>
-    <?= Html::a(Html::img(Yii::$app->request->baseUrl.'/images/logo.png', [ 'height'=>'40px']), Yii::$app->homeUrl, ['class' => 'logo']) ?>
-<?php // Html::a('<img = ><span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo'])  ?>
+    <?= Html::a(Html::img(Yii::$app->request->baseUrl . '/images/logo.png', [ 'height' => '40px']), Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?php // Html::a('<img = ><span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo'])  ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
@@ -153,31 +153,27 @@ use yii\bootstrap\NavBar;
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/> -->
-                        <span class="hidden-xs">ยินดีต้อนรับ : <?php echo $name = Yii::$app->user->identity->username; ?></span>
+                        <span class="hidden-xs">ยินดีต้อนรับ : <?php echo $name = Yii::$app->user->identity->username; ?>  <i class="fa fa-bars"></i></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <!-- Menu Body -->
                         <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
+                            <i class="fa fa-users"></i>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <?=
+                                Html::a(
+                                        ' ข้อมูลส่วนตัว', ['/profile/index'], ['class' => 'btn btn-info btn-flat fa fa-repeat']
+                                )
+                                ?>
                             </div>
                             <div class="pull-right">
                                 <?=
                                 Html::a(
-                                        'Sign out', ['/site/logout'], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+                                        ' ออกจากระบบ', ['/site/logout'], ['data-method' => 'post', 'class' => 'btn btn-danger btn-flat fa fa-repeat']
                                 )
                                 ?>
                             </div>
@@ -185,10 +181,11 @@ use yii\bootstrap\NavBar;
                     </ul>
                 </li>
 
-                <!-- User Account: style can be found in dropdown.less -->
+                <!-- User Account: style can be found in dropdown.less 
                 <li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>
+                -->
             </ul>
         </div>
     </nav>

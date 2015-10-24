@@ -19,7 +19,7 @@ class ZformSearch extends Zform
     {
         return [
             [['id', 'operate_by','gender', 'age', 'province', 'country', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'request_chanel', 'created_at', 'updated_at', 'cretaed_by', 'updated_by', 'approve_status', 'approve_by', 'approve_comment', 'dlt_office', 'dlt_br', 'brands', 'seat', 'car_type', 'owner_type'], 'integer'],
-            [['fullname', 'passport', 'address', 'telephone', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'approve_date', 'appearance', 'models', 'engine_no', 'car_color', 'carbody_no', 'ref', 'doc'], 'safe'],
+            [['fullname', 'passport', 'address', 'telephone', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'approve_date', 'appearance', 'models', 'engine_no', 'car_color', 'carbody_no', 'ref', 'docs'], 'safe'],
             [['weight', 'total_weight'], 'number'],
         ];
     }
@@ -101,7 +101,7 @@ class ZformSearch extends Zform
             ->andFilterWhere(['like', 'car_color', $this->car_color])
             ->andFilterWhere(['like', 'carbody_no', $this->carbody_no])
             ->andFilterWhere(['like', 'ref', $this->ref])
-            ->andFilterWhere(['like', 'doc', $this->doc]);
+            ->andFilterWhere(['like', 'docs', $this->docs]);
 
         return $dataProvider;
     }

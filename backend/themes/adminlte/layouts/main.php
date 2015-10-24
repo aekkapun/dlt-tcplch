@@ -46,7 +46,8 @@ if (Yii::$app->controller->action->id === 'login') {
             ['directoryAsset' => $directoryAsset]
         ) ?>
 
-        <?= $this->render(
+        <?=
+        $this->render(
             'left.php',
             ['directoryAsset' => $directoryAsset]
         )

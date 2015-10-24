@@ -2,7 +2,13 @@ html,
 body {
     height: 100%;
 }
+.boy{
+    display: block;
+    width:800px;
+    border-bottom-style: dotted;
+    text-align:center;
 
+}
 .wrap {
     min-height: 100%;
     height: auto;
@@ -201,9 +207,9 @@ navbar2 {
     border-color: #7545C1;
 }
 .login-form {
-	max-width: 350px;
-	margin: 80px auto;
-	font: 16px/1.6em ;
+    max-width: 350px;
+    margin: 80px auto;
+    font: 16px/1.6em ;
 }
 /* panel */
 .panel-dlt {
@@ -226,20 +232,51 @@ navbar2 {
 }
 #dot-input
 {
-  border:0;
-  border-bottom: 1px dotted;
-  padding:1px;
-  text-align:center;
+    border:0;
+    border-bottom: 1px dotted;
+    padding:1px;
+    text-align:center;
+}
+.dot-input2{
+    height: 30px;
+    width: auto;
+    //padding: 6px 6px;
+    font-size: 16px;
+    line-height: 1.42857;
+    color:#5E42A2;
+    background-color: #FFF;
+    background-image: none;
+    border:0;
+    border-bottom: 1px dotted;
+    padding:1px;
+    text-align:center;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.dot-view-tab{
+    font-size: 16px;padding-left: 3em;padding-right: 10px
+}
+.dot-view{
+    font-size: 16px;padding-left: 1em;padding-right: 10px
 }
 
+.divbox-dlt {
+    border-radius: 2 px;
+    border: 1px solid #9A9C9E;
+    padding: 10px;
+    width: auto ;
+    height: autopx;
+}
+.contentbox{
+    font-size: 18px;
+}
 
 /*******THSarabunNew**********/
 @font-face {
     font-family: 'THSarabunNew';
     src: url('thsarabunnew-webfont.eot');
     src: url('thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
-         url('thsarabunnew-webfont.woff') format('woff'),
-         url('thsarabunnew-webfont.ttf') format('truetype');
+        url('thsarabunnew-webfont.woff') format('woff'),
+        url('thsarabunnew-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 
@@ -249,8 +286,8 @@ navbar2 {
     font-family: 'THSarabunNew';
     src: url('thsarabunnew-webfont.eot');
     src: url('thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
-         url('thsarabunnew-webfont.woff') format('woff'),
-         url('thsarabunnew-webfont.ttf') format('truetype');
+        url('thsarabunnew-webfont.woff') format('woff'),
+        url('thsarabunnew-webfont.ttf') format('truetype');
     font-weight: bold;
     font-style: italic;
 
@@ -260,8 +297,8 @@ navbar2 {
     font-family: 'THSarabunNew';
     src: url('thsarabunnew-webfont.eot');
     src: url('thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
-         url('thsarabunnew-webfont.woff') format('woff'),
-         url('thsarabunnew-webfont.ttf') format('truetype');
+        url('thsarabunnew-webfont.woff') format('woff'),
+        url('thsarabunnew-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 
@@ -271,8 +308,8 @@ navbar2 {
     font-family: 'THSarabunNew';
     src: url('thsarabunnew-webfont.eot');
     src: url('thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
-         url('thsarabunnew-webfont.woff') format('woff'),
-         url('thsarabunnew-webfont.ttf') format('truetype');
+        url('thsarabunnew-webfont.woff') format('woff'),
+        url('thsarabunnew-webfont.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 

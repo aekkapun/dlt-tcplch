@@ -8,6 +8,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use backend\modules\usermanagement\models\UserType;
 
 /**
  * User model
@@ -28,7 +29,7 @@ class User extends ActiveRecord implements IdentityInterface {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
     const IS_BLOCK = 1;
-    const NO_BLOCK =0;
+    const NO_BLOCK = 0;
 
     /**
      * @inheritdoc
@@ -37,12 +38,23 @@ class User extends ActiveRecord implements IdentityInterface {
         return '{{%user}}';
     }
 
+    public $password;
+    public $confirm_password;
+
     /**
      * @inheritdoc
      */
     public function behaviors() {
         return [
             TimestampBehavior::className(),
+        ];
+    }
+
+    public function scenarios() {
+        return [
+            'create'   => ['username', 'email', 'password','is_block'],
+            'update' => ['username', 'email', 'is_block'],
+            'updateprofile'=>['username', 'email', 'password'],
         ];
     }
 
@@ -59,8 +71,21 @@ class User extends ActiveRecord implements IdentityInterface {
             [['username', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
-            [['email'], 'unique'],
-            [['password_reset_token'], 'unique']
+            //[['email'], 'unique'],
+//[['password_reset_token'], 'unique'],
+            ['password', 'required'],
+            ['password', 'string', 'min' => 6],
+            ['confirm_password', 'required'],
+            ['confirm_password', 'string', 'min' => 6],
+            ['confirm_password', 'compare', 'compareAttribute' => 'password'],
+        ];
+    }
+
+    public function getTitle() {
+        return [
+            "1" => "นาย",
+            "2" => "นาง",
+            "3" => "นางสาว",
         ];
     }
 
@@ -77,6 +102,11 @@ class User extends ActiveRecord implements IdentityInterface {
     public static function findIdentityByAccessToken($token, $type = null) {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
+
+    public function getUserGroup() {
+        return @$this->hasOne(UserType::className(), ['id' => 'user_type']);
+    }
+    
 
     /**
      * Finds user by username
