@@ -27,10 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box box-primary">
         <div class="box-header with-border">
             <p class="pull-right">
-                <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                 <?= Html::a('Print', ['certificate', 'id' => $model->id,], ['class' => ' btn btn-success fa fa-print','target'=>'_blank']) ?>
+                <?= Html::a('Update', ['zform/update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Print', ['zform/create-mpdf', 'id' => $model->id,], ['class' => ' btn btn-success fa fa-print', 'target' => '_blank']) ?>
                 <?=
-                Html::a('Delete', ['delete', 'id' => $model->id], [
+                Html::a('Delete', ['zform/delete', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => 'Are you sure you want to delete this item?',
@@ -130,32 +130,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bus"></i> ข้อมูล คนขับประจำรถ
-
                             <div class="pull-right">
-                                <?= Html::button('<i class="fa fa-user-plus"></i> เพิ่มคนขับรถ', ['value' => Url::to('index.php?r=permitapp/zform/createz&id=' . $model->id . ''), 'style' => 'padding: 2px 12px;', 'class' => 'btn btn-success ', 'id' => 'modalButton']) ?><br/>
+                                <?= Html::button('<i class="fa fa-user-plus"></i> เพิ่มคนขับรถ', ['value' => Url::to('index.php?r=permitapp/drivers/create-ajax&id=' . $model->id . ''), 'style' => 'padding: 2px 12px;', 'class' => 'btn btn-danger ', 'id' => 'activity-create-link']) ?><br/>
 
                             </div>
                         </div>
-
-
-
-                        <?php
-                        Modal::begin([
-                            'header' => '<h4><i class="fa fa-bus"></i> เพิ่มข้อมูลคนขับ</h4>',
-                            'id' => 'modal',
-                            'size' => 'modal-lg',
-                        ]);
-
-                        echo "<div id='modalContent'></div>";
-
-                        Modal::end();
-                        ?>
                         <?php
                         Modal::begin([
                             'id' => 'activity-modal',
-                            'header' => '<h4 class="modal-title"><i class="fa fa-bus"></i> เพิ่มคนขับรถ</h4>',
+                            'header' => '<h4 class="modal-title fa fa-user-plus">เพิ่มข้อมูลคนขับ</h4>',
                             'size' => 'modal-lg',
-                                //'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">ปิด</a>',
+                            //'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">ปิด</a>',
                         ]);
                         Modal::end();
                         ?>
@@ -212,21 +197,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                             // 'update_by',
                                             ['class' => 'yii\grid\ActionColumn',
                                                 'headerOptions' => ['width' => '100'],
-                                                'template' => '<div class="btn-group btn-group-sm text-center" role="group">{copy} {view} {update} {delete}{deletediv} </div>',
+                                                'template' => '<div class="btn-group btn-group-sm text-center" role="group">{update}{delete-app} </div>',
                                                 'buttons' => [
-                                                    'view' => function ($url, $model, $key) {
-                                                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '#', [
-                                                                    'class' => 'activity-view-link',
-                                                                    'title' => $this->title,
-                                                                    'data-toggle' => 'modal',
-                                                                    'data-target' => '#activity-modal',
-                                                                    'data-id' => $key,
-                                                                    'data-pjax' => '0',
-                                                        ]);
-                                                    },
-                                                            'update' => function ($url, $model, $key) {
-                                                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '#', [
-                                                                    'class' => 'activity-update-link btn btn-default',
+
+                                                    'update' => function ($url, $model, $key) {
+                                                        return Html::a('<i class=" btn btn-default glyphicon glyphicon-pencil"></i>', '#', [
+                                                                    'class' => 'activity-update-link',
                                                                     'title' => 'แก้ไขข้อมูล',
                                                                     'data-toggle' => 'modal',
                                                                     'data-target' => '#activity-modal',
@@ -234,7 +210,25 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                     'data-pjax' => '0',
                                                         ]);
                                                     },
-           
+                                                            'delete-app' => function($url, $model, $key) {
+                                                        return Html::a('<i class=" btn btn-danger glyphicon glyphicon-trash"></i>', $url, [
+                                                                    'title' => Yii::t('yii', 'Delete'),
+                                                                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                                                    'data-method' => 'post',
+                                                                    'data-pjax' => '0',
+                                                                        //'class' => 'btn btn-danger'
+                                                        ]);
+                                                    },
+//                                                    'view' => function ($url, $model, $key) {
+//                                                    return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '#', [
+//                                                    'class' => 'activity-view-link',
+//                                                    'title' => $this->title,
+//                                                    'data-toggle' => 'modal',
+//                                                    'data-target' => '#activity-modal',
+//                                                    'data-id' => $key,
+//                                                    'data-pjax' => '0',
+//                                                    ]);
+//                                                },
                                                         ]
                                                     ],
                                                 ],
@@ -245,11 +239,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                 </div>
 
-                                <div class="drivers-form">
-                                    
-                                    <image src="<?= Yii::$app->request->baseUrl;?>/images/logo.png"/>
-                                </div>
-
                             </div><!-- /.box-body -->
                         </div>
                     </div>
@@ -257,12 +246,12 @@ $this->params['breadcrumbs'][] = $this->title;
         function init_click_handlers(){
             $("#activity-create-link").click(function(e) {
                     $.get(
-                        "?r=permitapp/zform/createz",
+                        "?r=permitapp/drivers/create-ajax&id='.$model->id.'",
                         function (data)
                         {
                             $("#activity-modal").find(".modal-body").html(data);
                             $(".modal-body").html(data);
-                            $(".modal-title").html("เพิ่มข้อมูลสมาชิก");
+                            $(".modal-title").html(" เพิ่มข้อมูลคนขับ");
                             $("#activity-modal").modal("show");
                         }
                     );
@@ -270,7 +259,7 @@ $this->params['breadcrumbs'][] = $this->title;
             $(".activity-view-link").click(function(e) {
                     var fID = $(this).closest("tr").data("key");
                     $.get(
-                        "?r=permitapp/zform/viewdiv",
+                        "?r=permitapp/drivers/view-ajax",
                         {
                             id: fID
                         },
@@ -278,7 +267,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         {
                             $("#activity-modal").find(".modal-body").html(data);
                             $(".modal-body").html(data);
-                            $(".modal-title").html("ข้อมูล คนขับประจำรถ");
+                            $(".modal-title").html(" เปิดดูข้อมูลคนขับ");
                             $("#activity-modal").modal("show");
                         }
                     );
@@ -286,7 +275,7 @@ $this->params['breadcrumbs'][] = $this->title;
             $(".activity-update-link").click(function(e) {
                     var fID = $(this).closest("tr").data("key");
                     $.get(
-                        "?r=permitapp/zform/updatediv",
+                        "?r=permitapp/drivers/update-ajax&id='.$model->id.'",
                         {
                             id: fID
                         },
@@ -294,13 +283,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         {
                             $("#activity-modal").find(".modal-body").html(data);
                             $(".modal-body").html(data);
-                            $(".modal-title").html("อัพเดท");
+                            $(".modal-title").html(" แก้ไขข้อมูลคนขับ");
                             $("#activity-modal").modal("show");
                         }
                     );
                 });
+            
         }
         init_click_handlers(); //first run
-        $("#driversGrid").on("pjax:success", function() {
+        $("#customer_pjax_id").on("pjax:success", function() {
           init_click_handlers(); //reactivate links in grid after pjax update
         });'); ?>

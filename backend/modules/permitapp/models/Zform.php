@@ -15,6 +15,7 @@ use backend\modules\configuration\models\Province;
 use backend\modules\configuration\models\Countries;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
+use mdm\autonumber\Behavior;
 use yii\db\Expression;
 
 /**
@@ -66,6 +67,7 @@ use yii\db\Expression;
 class Zform extends \yii\db\ActiveRecord {
 
     const UPLOAD_FOLDER = 'docpermit';
+    const UPLOAD_FOLDERX = 'driver_file';
 
     /**
      * @inheritdoc
@@ -86,18 +88,34 @@ class Zform extends \yii\db\ActiveRecord {
                 'class' => BlameableBehavior::className(),
                 'createdByAttribute' => 'cretaed_by',
                 'updatedByAttribute' => 'updated_by'
-            ]
+            ],
+//            [
+//                'class' => 'mdm\autonumber\Behavior',
+//                'attribute' => 'auto_code', // required
+//                'group' => $this->id, // optional
+//                'value' =>date('Y-m-d') . '.?', // format auto number. '?' will be replaced with generated number
+//                'digit' => 4 // optional, default to null. 
+//            ],
         ];
     }
 
     /**
      * @inheritdoc
      */
+    public function scenarios() {
+        return [
+            'create' => ['gender','owner_type','car_type','age','gender', 'operate_by', 'fullname', 'passport', 'address', 'province','telephone', 'country', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point','appearance','brands','models','engine_no','carbody_no','car_color'],
+            'update' => ['gender', 'car_type', 'operate_by', 'fullname', 'passport', 'address', 'province', 'country', 'car_enroll_country', 'plates_number', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'appearance', 'brands', 'models', 'engine_no'],
+            'default' => ['gender', 'car_type', 'operate_by', 'fullname', 'passport', 'address', 'province', 'country', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'appearance', 'brands', 'models', 'engine_no'],
+        ];
+    }
+
     public function rules() {
         return [
-            [['gender', 'car_type', 'operate_by', 'fullname', 'passport', 'address', 'province', 'country', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'appearance', 'brands', 'models', 'engine_no'], 'required'],
+            [['gender','owner_type', 'car_type', 'operate_by', 'fullname', 'passport', 'address', 'province', 'country', 'car_enroll_country', 'plates_number', 'start_date', 'end_date', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'appearance', 'brands', 'models', 'engine_no','carbody_no','car_color'], 'required'],
             [['gender', 'operate_by', 'age', 'province', 'country', 'start_province', 'start_border_point', 'target_province', 'out_province', 'out_border_point', 'request_chanel', 'created_at', 'updated_at', 'cretaed_by', 'updated_by', 'approve_status', 'approve_by', 'approve_comment', 'dlt_office', 'dlt_br', 'seat', 'car_type', 'owner_type'], 'integer'],
             [['start_date', 'end_date', 'approve_date'], 'safe'],
+            [['auto_code'],'nextValue','format'=>date('Y-m-d').'.?'],
             [['weight', 'total_weight'], 'number'],
             [['docs'], 'file', 'maxFiles' => 10],
             [['fullname', 'address', 'appearance'], 'string', 'max' => 128],
@@ -155,12 +173,13 @@ class Zform extends \yii\db\ActiveRecord {
             'engine_no' => 'เลขเครื่องยนต์',
             'seat' => 'ที่นั่ง',
             'car_type' => 'ประเภทรถ',
-            'owner_type' => 'ผู้ขออนุญาติ เป็น/ไม่เป็น เจ้าของรถ',
+            'owner_type' => 'ผู้ขออนุญาติ',
             'car_color' => 'สีรถ',
-            'carbody_no' => 'เลขเครื่องยนต์',
+            'carbody_no' => 'เลขตัวรถ',
             'ref' => 'Ref',
             'docs' => 'แนบหลักฐาน',
-            'operate_by' => 'ผู้ยื่นดำเนินการ'
+            'operate_by' => 'ผู้ยื่นดำเนินการ',
+            'auto_code'=>'รหัสคำขอ',
         ];
     }
 
@@ -202,6 +221,10 @@ class Zform extends \yii\db\ActiveRecord {
         return Url::base(true) . '/' . self::UPLOAD_FOLDER . '/';
     }
 
+    public static function getUploadUrlx() {
+        return Url::base(true) . '/' . self::UPLOAD_FOLDERX . '/';
+    }
+
     public function listDownloadFiles($type) {
         $docs_file = '';
         if (in_array($type, ['docs', 'covenant'])) {
@@ -231,6 +254,29 @@ class Zform extends \yii\db\ActiveRecord {
                         'caption' => $value,
                         'width' => '120px',
                         'url' => Url::to(['/permitapp/zform/deletefile', 'id' => $this->id, 'fileName' => $key, 'field' => $field]),
+                        'key' => $key
+                    ];
+                } else {
+                    $initial[] = Html::img(self::getUploadUrl() . $this->ref . '/' . $value, ['class' => 'file-preview-image', 'alt' => $model->file_name, 'title' => $model->file_name]);
+                }
+            }
+        }
+        return $initial;
+    }
+
+    public function initialPreviewx($data, $field, $type = 'file') {
+        $initial = [];
+        $files = Json::decode($data);
+        if (is_array($files)) {
+            foreach ($files as $key => $value) {
+                if ($type == 'file') {
+                    $initial[] = "<div class='file-preview-other'><h2><i class='glyphicon glyphicon-file'></i></h2></div>";
+                } elseif ($type == 'config') {
+                    $initial[] = [
+                        'caption' => $value,
+                        'width' => '120px',
+                        //'url'    => Url::to(['/permitapp/drivers/deletefile','id'=>$this->id,'fileName'=>$key,'field'=>$field]),
+                        'url' => Url::to(['/permitapp/drivers/deletefile', 'id' => $this->id, 'fileName' => $key, 'field' => $field]),
                         'key' => $key
                     ];
                 } else {
@@ -290,7 +336,7 @@ class Zform extends \yii\db\ActiveRecord {
 
     function DateDiffStart() {
         $ndate = (strtotime($this->start_date) - strtotime('now')) / ( 60 * 60 * 24 );  // 1 day = 60*60*24
-        if($ndate<10){
+        if ($ndate < 10) {
             $this->addError($attr, "ต้องดำเนิการล่วงหน้าอย่างน้อย 10 วัน ก่อนเดินทางเข้าประเทศ.");
             return false;
         }
@@ -314,14 +360,14 @@ class Zform extends \yii\db\ActiveRecord {
 
     public function validateDates() {
         $ndate = (strtotime($this->end_date) - strtotime($this->start_date)) / ( 60 * 60 * 24 );  // 1 day = 60*60*24
-        
+
         if ($ndate <= 0) {
             $this->addError($attr, "วันที่เดินทางออกจากประเทศต้องมากกว่าวันที่เดินทางเข้าประเทศ.");
             return false;
         } elseif ($ndate > 30) {
             $this->addError($attr, "ระยะเวลาในการขออนุญาต ได้ไม่เกิน 30 วัน.");
             return false;
-        }else{
+        } else {
             return true;
         }
     }

@@ -107,15 +107,16 @@ class ZformController extends Controller {
      * @return mixed
      */
     public function actionView($id) {
+        return $this->redirect(['drivers/view-app', 'id' =>$id]);
 //$modelsDriver = Drivers::find()->where(['appilcant_id' => $id])->all();
-        $modelsDriver = new ActiveDataProvider([
-            'query' => Drivers::find()->where(['appilcant_id' => $id]),
-        ]);
-        $model = $this->findModel($id);
-        return $this->render('view', [
-                    'model' => $model,
-                    'modelsDriver' => $modelsDriver,
-        ]);
+//        $modelsDriver = new ActiveDataProvider([
+//            'query' => Drivers::find()->where(['appilcant_id' => $id]),
+//        ]);
+//        $model = $this->findModel($id);
+//        return $this->render('view', [
+//                    'model' => $model,
+//                    'modelsDriver' => $modelsDriver,
+//        ]);
     }
 
     public function actionViewdiv($id) {
@@ -139,7 +140,7 @@ class ZformController extends Controller {
      */
     public function actionCreate() {
         $model = new Zform();
-
+          $model->scenario = 'create';
         if ($model->load(Yii::$app->request->post())) {
 
             $this->CreateDir($model->ref);
@@ -157,7 +158,7 @@ class ZformController extends Controller {
                     'positonY' => 'top',
                     'positonX' => 'right'
                 ]);
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['drivers/view-app', 'id' => $model->id]);
             }
         } else {
             Yii::$app->getSession()->setFlash('alert2', [
@@ -216,6 +217,7 @@ class ZformController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $model->scenario = 'update';
         $border_start = ArrayHelper::map($this->getBorder($model->start_province), 'id', 'name');
         $border_out = ArrayHelper::map($this->getBorder($model->out_province), 'id', 'name');
 //$tempCovenant = $model->covenant;
@@ -236,7 +238,7 @@ class ZformController extends Controller {
                     'positonY' => 'top',
                     'positonX' => 'right'
                 ]);
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['drivers/view-app', 'id' => $model->id]);
             }
         }
 
@@ -254,9 +256,9 @@ class ZformController extends Controller {
         $tempDocs = $model->docs;
         if ($model->load(Yii::$app->request->post())) {
 
-            $this->CreateDir($model->ref);
+            $this->CreateDirDriver($model->ref);
             //$model->covenant = $this->uploadSingleFile($model,$tempCovenant);
-            $model->docs = $this->uploadMultipleFile($model, $tempDocs);
+            $model->docs = $this->uploadMultipleFileDriver($model, $tempDocs);
 
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->appilcant_id]);

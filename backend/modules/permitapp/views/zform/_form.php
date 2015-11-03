@@ -99,7 +99,7 @@ use kartik\widgets\TypeaheadBasic;
                     <span>โทรศัพท์</span><?=
                     $form->field($model, 'telephone')->widget(\yii\widgets\MaskedInput::classname(), [
                         'mask' => '99-9999-9999',
-                    ])->label(false)
+                    ])->hint('เบอร์โทรศัพท์ ต้องไม่เป็นค่าว่าง')->label(false)
                     ?>
                 </div>
                 <div class="col-md-4 col-xs-4"><span>มีความประสงค์ขออนุญาตนำรถที่จดทะเบียนในประเทศ</span>

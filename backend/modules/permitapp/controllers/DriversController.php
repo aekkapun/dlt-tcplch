@@ -3,8 +3,11 @@
 namespace backend\modules\permitapp\controllers;
 
 use Yii;
+use backend\modules\permitapp\models\Zform;
+use backend\modules\permitapp\models\ZformSearch;
 use backend\modules\permitapp\models\Drivers;
 use backend\modules\permitapp\models\DriversSearch;
+use yii\data\ActiveDataProvider;
 //use app\models\Uploads;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -36,6 +39,18 @@ class DriversController extends Controller {
      * Lists all Freelance models.
      * @return mixed
      */
+    public function actionViewApp($id) {
+//$modelsDriver = Drivers::find()->where(['appilcant_id' => $id])->all();
+        $modelsDriver = new ActiveDataProvider([
+            'query' => Drivers::find()->where(['appilcant_id' => $id]),
+        ]);
+        $model = Zform::findOne(['id' => $id]);
+        return $this->render('view-app', [
+                    'model' => $model,
+                    'modelsDriver' => $modelsDriver,
+        ]);
+    }
+
     public function actionIndex() {
         $searchModel = new DriversSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -67,6 +82,12 @@ class DriversController extends Controller {
         ]);
     }
 
+    public function actionViewAjax($id) {
+        return $this->renderAjax('view', [
+                    'model' => $this->findModel($id),
+        ]);
+    }
+
     /**
      * Creates a new Freelance model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -82,6 +103,7 @@ class DriversController extends Controller {
             $model->docs = $this->uploadMultipleFile($model);
 
             if ($model->save()) {
+                 return $this->redirect(['view', 'id' => $model->id]);
                 echo 1;
             } else {
                 echo 0;
@@ -94,8 +116,7 @@ class DriversController extends Controller {
                     'model' => $model,
         ]);
     }
-
-    public function actionCreate2() {
+        public function actionCreate_1() {
         $model = new Drivers();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -105,14 +126,58 @@ class DriversController extends Controller {
             $model->docs = $this->uploadMultipleFile($model);
 
             if ($model->save()) {
-                //return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view-app', 'id' => $model->appilcant_id]);
                 return print_r($model);
             }
         } else {
             $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(), 10);
         }
 
-        return $this->renderAjax('create2', [
+        return $this->renderAjax('create', [
+                    'model' => $model,
+        ]);
+    }
+
+    public function actionCreateAjax() {
+//        $model = new Drivers();
+//
+//        if ($model->load(Yii::$app->request->post())) {
+//
+//            $this->CreateDir($model->ref);
+//            //$model->covenant = $this->uploadSingleFile($model);
+//            $model->docs = $this->uploadMultipleFile($model);
+//
+//            if ($model->save()) {
+//                return $this->redirect(['view-app', 'id' => $model->appilcant_id]);
+//                return print_r($model);
+//            }
+//        } else {
+//            $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(), 10);
+//        }
+//
+//        return $this->renderAjax('create2', [
+//                    'model' => $model,
+//        ]);
+        
+                $model = new Drivers();
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $this->CreateDir($model->ref);
+            //$model->covenant = $this->uploadSingleFile($model);
+            $model->docs = $this->uploadMultipleFile($model);
+
+            if ($model->save()) {
+                 return $this->redirect(['view-app', 'id' => $model->appilcant_id]);
+                echo 1;
+            } else {
+                echo 0;
+            }
+        } else {
+            $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(), 10);
+        }
+
+        return $this->renderAjax('create', [
                     'model' => $model,
         ]);
     }
@@ -135,11 +200,32 @@ class DriversController extends Controller {
             $model->docs = $this->uploadMultipleFile($model, $tempDocs);
 
             if ($model->save()) {
-                return $this->redirectAjax(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         }
 
         return $this->render('update', [
+                    'model' => $model
+        ]);
+    }
+
+    public function actionUpdateAjax($id) {
+        $model = $this->findModel($id);
+
+        //$tempCovenant = $model->covenant;
+        $tempDocs = $model->docs;
+        if ($model->load(Yii::$app->request->post())) {
+
+            $this->CreateDir($model->ref);
+            //$model->covenant = $this->uploadSingleFile($model,$tempCovenant);
+            $model->docs = $this->uploadMultipleFile($model, $tempDocs);
+
+            if ($model->save()) {
+                return $this->redirect(['view-app', 'id' => $model->appilcant_id]);
+            }
+        }
+
+        return $this->renderAjax('update', [
                     'model' => $model
         ]);
     }
@@ -157,8 +243,17 @@ class DriversController extends Controller {
         // Uploads::deleteAll(['ref'=>$model->ref]);
 
         $model->delete();
+        return $this->redirect(['view-app', 'id' => $model->appilcant_id]);
+        // return $this->redirect(['index']);
+    }
 
-        return $this->redirect(['index']);
+    public function actionDeleteApp($id) {
+        $model = $this->findModel($id);
+        //remove upload file & data
+        $this->removeUploadDir($model->ref);
+        // Uploads::deleteAll(['ref'=>$model->ref]);
+        $model->delete();
+        return $this->redirect(['view-app', 'id' => $model->appilcant_id]);
     }
 
     /**

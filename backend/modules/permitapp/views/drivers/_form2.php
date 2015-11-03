@@ -20,20 +20,22 @@ use yii\helpers\Json;
                     'class' => 'inline',
                     'enctype' => 'multipart/form-data'
                 ],]);
-    $x = Yii::$app->getRequest()->getQueryParam('id')
+    $request = Yii::$app->request;
+    $get = $request->get();
+    $id = $request->get('id');
     ?>
     <?= $form->errorSummary($model); ?>
-<?= $form->field($model, 'ref')->textInput()->label(false); ?>
+    <?= $form->field($model, 'ref')->hiddenInput()->label(false); ?>
     <div class="row">
         <div class="col-md-4">
 
-<?= $form->field($model, 'drivers_title')->label('คำนำหน้า')->dropDownList(AppCar::itemAlias('prefixs')) ?>
+            <?= $form->field($model, 'drivers_title')->label('คำนำหน้า')->dropDownList(AppCar::itemAlias('prefixs')) ?>
         </div>
         <div class="col-md-4">
-<?= $form->field($model, 'drivers_name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'drivers_name')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-4">
-<?= $form->field($model, 'drivers_lastname')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'drivers_lastname')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
     <div class="row">
@@ -65,20 +67,25 @@ use yii\helpers\Json;
     </div>
 
 
-<?= $form->field($model, 'appilcant_id')->textInput(['maxlength' => true, 'value' => $x])->label(false) ?>
+    <?php if($model->isNewRecord){
+       echo $form->field($model, 'appilcant_id')->textInput(['maxlength' => true, 'value' =>$id])->label('test'); 
+    } else{
+       echo $form->field($model, 'appilcant_id')->textInput(['maxlength' => true])->label(false); 
+    }
+    ?>
 
     <div class="row">
         <div class="col-md-6 col-xs-6">
-<?= Html::submitButton($model->isNewRecord ? '<i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูล' : 'อัพเดทข้อมูล', ['class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-primary') . ' btn-lg btn-block']) ?>
+            <?= Html::submitButton($model->isNewRecord ? '<i class="glyphicon glyphicon-plus"></i> เพิ่มข้อมูล' : 'อัพเดทข้อมูล', ['class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-primary') . ' btn-lg btn-block']) ?>
         </div> 
         <div class="col-md-6 col-xs-6">
-<?= Html::resetButton($model->isNewRecord ? '<i class="glyphicon glyphicon-refresh"></i> เคลียร์ข้อมูล' : 'คืนค่าเดิม', ['class' => ($model->isNewRecord ? 'btn btn-danger' : 'btn btn-warning') . ' btn-lg btn-block']) ?>
+            <?= Html::resetButton($model->isNewRecord ? '<i class="glyphicon glyphicon-refresh"></i> เคลียร์ข้อมูล' : 'คืนค่าเดิม', ['class' => ($model->isNewRecord ? 'btn btn-danger' : 'btn btn-warning') . ' btn-lg btn-block']) ?>
         </div> 
     </div>
 </div>
-    <?php ActiveForm::end(); ?>
-    <?php
-    $script = <<< JS
+<?php ActiveForm::end(); ?>
+<?php
+$script = <<< JS
 
 $('form#{$model->formName()}').on('beforeSubmit', function(e) 
 {
@@ -104,5 +111,5 @@ $('form#{$model->formName()}').on('beforeSubmit', function(e)
 });
 
 JS;
-    $this->registerJs($script);
-    ?>
+$this->registerJs($script);
+?>
